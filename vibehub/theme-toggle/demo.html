@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سوییچ شب و روز — VibeHub</title>
+<link rel="stylesheet" href="./day-night.css">
+<style>
+  /* Fallbacks for the two app tokens the component borrows from VibeHub's theme. */
+  :root {
+    --control-border: rgb(255 255 255 / 0.25);
+    --border: rgb(255 255 255 / 0.18);
+    --primary: #4f9cf9;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #101318;
+    color: #cfd6e4;
+    font-family: Vazirmatn, system-ui, sans-serif;
+  }
+  main { display: flex; flex-direction: column; align-items: center; gap: 3rem; padding: 3rem; }
+  .row { display: flex; align-items: center; gap: 3.5rem; }
+  figure { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: 0; }
+  figcaption { font-size: 0.85rem; opacity: 0.75; }
+</style>
+</head>
+<body>
+<main>
+  <div class="row">
+    <figure data-state="day"><figcaption>روز (ثابت)</figcaption></figure>
+    <figure data-state="night"><figcaption>شب (ثابت)</figcaption></figure>
+    <figure id="live-holder"><figcaption>زنده — کلیک کنید</figcaption></figure>
+  </div>
+</main>
+<script>
+  /* The scene markup below is the exact DOM the React component renders
+     (captured from the running VibeHub app), embedded once and stamped into
+     every instance. State differences are just attributes on the button:
+     data-night + aria-checked + title. */
+  const SCENE = `<span class="vh-dn-pill" aria-hidden="true"><span class="vh-dn-sky"></span><svg class="vh-dn-layer vh-dn-stars" viewBox="0 0 530 243"><g transform="translate(70 70) scale(7)"><g class="vh-dn-star" style="--i: 0; --t: 3.2s;"><path d="M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z"></path></g></g><g transform="translate(160 92) scale(5)"><g class="vh-dn-star" style="--i: 1; --t: 2.6s;"><path d="M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z"></path></g></g><g transform="translate(232 72) scale(6)"><g class="vh-dn-star" style="--i: 2; --t: 3.8s;"><path d="M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z"></path></g></g><g transform="translate(250 160) scale(8)"><g class="vh-dn-star" style="--i: 3; --t: 3.1s;"><path d="M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z"></path></g></g><g transform="translate(120 175) scale(5)"><g class="vh-dn-star" style="--i: 4; --t: 2.9s;"><path d="M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z"></path></g></g><g transform="translate(48 130)"><g class="vh-dn-star" style="--i: 5; --t: 2.2s;"><circle r="2.4"></circle></g></g><g transform="translate(110 40)"><g class="vh-dn-star" style="--i: 6; --t: 2.7s;"><circle r="1.8"></circle></g></g><g transform="translate(200 130)"><g class="vh-dn-star" style="--i: 7; --t: 3.4s;"><circle r="2.2"></circle></g></g><g transform="translate(296 108)"><g class="vh-dn-star" style="--i: 8; --t: 2.4s;"><circle r="1.6"></circle></g></g><g transform="translate(180 205)"><g class="vh-dn-star" style="--i: 9; --t: 3s;"><circle r="1.8"></circle></g></g><g transform="translate(82 205)"><g class="vh-dn-star" style="--i: 10; --t: 2.5s;"><circle r="1.6"></circle></g></g><g transform="translate(288 45)"><g class="vh-dn-star" style="--i: 11; --t: 3.6s;"><circle r="1.4"></circle></g></g></svg><span class="vh-dn-shooting"></span><span class="vh-dn-knob-track"><span class="vh-dn-halo"></span><span class="vh-dn-knob"><span class="vh-dn-sun"></span><span class="vh-dn-moon"><span class="vh-dn-crater vh-dn-c1"></span><span class="vh-dn-crater vh-dn-c2"></span><span class="vh-dn-crater vh-dn-c3"></span></span></span></span><svg class="vh-dn-layer vh-dn-cloud vh-dn-cloud-1" viewBox="0 0 530 243"><g><circle cx="230" cy="232" r="42"></circle><circle cx="310" cy="205" r="48"></circle><circle cx="388" cy="172" r="54"></circle><circle cx="462" cy="110" r="70"></circle><circle cx="528" cy="48" r="72"></circle><circle cx="480" cy="262" r="100"></circle><circle cx="540" cy="150" r="60"></circle></g></svg><svg class="vh-dn-layer vh-dn-cloud vh-dn-cloud-2" viewBox="0 0 530 243"><g><circle cx="180" cy="248" r="40"></circle><circle cx="262" cy="228" r="44"></circle><circle cx="345" cy="212" r="46"></circle><circle cx="428" cy="180" r="54"></circle><circle cx="505" cy="118" r="66"></circle><circle cx="548" cy="62" r="58"></circle><circle cx="500" cy="252" r="90"></circle></g></svg><svg class="vh-dn-layer vh-dn-cloud vh-dn-cloud-3" viewBox="0 0 530 243"><g><circle cx="118" cy="268" r="42"></circle><circle cx="200" cy="254" r="42"></circle><circle cx="285" cy="246" r="44"></circle><circle cx="370" cy="238" r="46"></circle><circle cx="452" cy="208" r="52"></circle><circle cx="530" cy="150" r="66"></circle><circle cx="510" cy="262" r="85"></circle></g></svg></span>`;
+
+  function build(night) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'switch');
+    b.setAttribute('aria-checked', String(night));
+    b.setAttribute('aria-label', 'شب و روز');
+    b.setAttribute('title', night ? 'رفتن به حالت شب' : 'رفتن به حالت روز');
+    b.className = 'vh-daynight';
+    if (night) b.setAttribute('data-night', '');
+    b.innerHTML = SCENE;
+    return b;
+  }
+
+  document.querySelector('[data-state="day"]').prepend(build(false));
+  document.querySelector('[data-state="night"]').prepend(build(true));
+
+  const live = build(false);
+  document.getElementById('live-holder').prepend(live);
+  live.addEventListener('click', () => {
+    const night = live.toggleAttribute('data-night');
+    live.setAttribute('aria-checked', String(night));
+    live.setAttribute('title', night ? 'رفتن به حالت شب' : 'رفتن به حالت روز');
+    // Same squash-and-settle knob bounce the React component plays on click.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const knob = live.querySelector('.vh-dn-knob');
+      knob.animate([
+        { transform: 'scale(1, 1)' },
+        { transform: 'scale(1.14, .88)', offset: 0.25 },
+        { transform: 'scale(.94, 1.06)', offset: 0.55 },
+        { transform: 'scale(1.02, .98)', offset: 0.75 },
+        { transform: 'scale(1, 1)' },
+      ], { duration: 800, easing: 'ease-out' });
+    }
+  });
+</script>
+</body>
+</html>
