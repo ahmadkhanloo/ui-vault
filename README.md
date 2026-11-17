@@ -10,8 +10,10 @@
 ui-vault/
 ├─ vibehub/                  ← اجزای ساخته‌شده در اپ VibeHub
 │  └─ theme-toggle/          ← سوییچ شب و روز (کد + CSS + دمو + اسکرین‌شات)
-└─ d3motion/                 ← ۲۴ کامپوننت انیمیشنی رایگان از d3motion.pro
-   └─ <slug>/                ← card.png + component.html برای هر کامپوننت
+├─ d3motion/                 ← ۲۴ کامپوننت انیمیشنی رایگان از d3motion.pro
+│  └─ <slug>/                ← card.png + component.html برای هر کامپوننت
+└─ cake-couch/               ← نمایش محصول انیمیشنی تک‌فایلی (HTML + CSS + SVG)
+   └─ shots/                 ← اسکرین‌شات، GIF سه تم و بنر
 ```
 
 ## VibeHub — سوییچ شب و روز
@@ -21,6 +23,16 @@ ui-vault/
 | روز | شب |
 | --- | --- |
 | ![روز](vibehub/theme-toggle/shots/day.png) | ![شب](vibehub/theme-toggle/shots/night.png) |
+
+## Cake Couch — نمایش محصول انیمیشنی
+
+کارت ویترین محصول با سه تم چرخشی، مداری نامرئی که اشیا رویش می‌گردند و پنتاگون رنگیِ پس‌زمینه که با هر تم ۱۴۴ درجه می‌چرخد. HTML/CSS/JS خالص با تصویرسازی SVG دست‌ساز، بدون وابستگی و بدون build (حدود ۱۲KB gzip). کد کامل در [cake-couch/](cake-couch/) است — [README آیتم](cake-couch/README.md) · [دموی زنده](https://cake-couch-animation.vercel.app) · [مخزن منبع](https://github.com/HamzehGhoreyshi/cake-couch-animation)
+
+| کارت | انیمیشن |
+| --- | --- |
+| [![Cake Couch](cake-couch/card.png)](cake-couch/) | ![سه تم](cake-couch/shots/loop.gif) |
+
+برای اجرا، `art.svg` با `fetch` خوانده می‌شود؛ داخل `cake-couch/` یک `python -m http.server 4173` بالا بیاورید و `http://localhost:4173` را باز کنید.
 
 ## d3motion.pro — اجزای رایگان انیمیشنی
 
@@ -41,4 +53,6 @@ ui-vault/
 - محلی: هر `component.html` و `demo.html` را مستقیم در مرورگر باز کنید — انیمیشن زندهٔ واقعی را می‌بینید.
 
 > **نکتهٔ حقوقی:** فایل‌های `d3motion/` عیناً از سایت منبع دانلود شده‌اند و متعلق به سازندهٔ d3motion.pro هستند؛ این مجموعه فقط برای مرجع شخصی است و این ریپو باید خصوصی بماند.
+>
+> `cake-couch/` از مخزن عمومی [HamzehGhoreyshi/cake-couch-animation](https://github.com/HamzehGhoreyshi/cake-couch-animation) کپی شده و تصویرسازی‌هایش کار اورجینال همان نویسنده است (الهام از شات Cake Couch اثر Cosmin Capitanu، بدون کپی asset). آن مخزن فایل لایسنس ندارد، پس این کپی هم فقط مرجع شخصی است.
 </div>

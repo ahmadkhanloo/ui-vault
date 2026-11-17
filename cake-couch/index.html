@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cake Couch</title>
+<meta name="description" content="A dependency-free animated product showcase in HTML, CSS and SVG. Inspired by Cake Couch by Cosmin Capitanu.">
+<meta name="theme-color" content="#e2e2e3">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cake-couch-animation.vercel.app/">
+<meta property="og:title" content="Cake Couch">
+<meta property="og:description" content="A dependency-free animated product showcase in HTML, CSS and SVG. Inspired by Cake Couch by Cosmin Capitanu.">
+<meta property="og:image" content="https://cake-couch-animation.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cake Couch product showcase card: Sofa cake theme with a purple sofa and a product list">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cake Couch">
+<meta name="twitter:description" content="A dependency-free animated product showcase in HTML, CSS and SVG.">
+<meta name="twitter:image" content="https://cake-couch-animation.vercel.app/og-image.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%237a3df2'/%3E%3Crect x='6' y='11' width='20' height='11' rx='5.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<link rel="preload" href="art.svg" as="fetch" crossorigin>
+<script src="app.js" defer></script>
+</head>
+<body>
+<main class="wrap">
+  <section class="card" id="card" aria-roledescription="carousel" aria-label="My storehouse collections">
+    <div class="bshade" aria-hidden="true"></div>
+    <div class="bclip" aria-hidden="true">
+      <!-- gradient stays fixed (light top-left); only the square that masks it rotates -->
+      <svg id="blob" viewBox="0 0 710 482" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="310" y2="362"><stop offset="0" style="stop-color:var(--c1)"/><stop offset="1" style="stop-color:var(--c2)"/></linearGradient>
+          <mask id="bmask" maskUnits="userSpaceOnUse" x="-50" y="-50" width="860" height="700"><g class="sway"><polygon id="bsq" fill="#fff" stroke="#fff" stroke-linejoin="round"/></g></mask>
+        </defs>
+        <rect x="-50" y="-50" width="860" height="700" fill="url(#bg)" mask="url(#bmask)"/>
+      </svg>
+    </div>
+    <div class="glow" aria-hidden="true"></div>
+    <svg class="logo" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1.5 2 12.5h10Z M7 6.5 4.6 12.2" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <svg class="smile" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="url(#gSm)"/><path d="M8 15c2 6 13 7 16 0z" fill="#3a2a1c" transform="rotate(-14 16 16)"/><circle cx="10" cy="11" r="1.7" fill="#3a2a1c"/><circle cx="21" cy="9" r="1.7" fill="#3a2a1c"/></svg>
+
+    <div class="hclip" id="head" aria-live="polite"></div>
+    <svg class="bean" viewBox="0 0 70 52" aria-hidden="true"><use href="#s-bean"/></svg>
+    <div class="hero" id="hero" aria-hidden="true"></div>
+
+    <div class="store">
+      <h2>My<br>storehouse</h2>
+      <div class="cols" aria-hidden="true"><span>PRODUCT</span><span>NO</span></div>
+      <ul class="rows" id="rows"></ul>
+    </div>
+
+    <div class="dock">
+      <svg class="ic ln" style="left:calc(var(--u)*32)" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="7" width="16" height="6" rx="1.5"/><path d="M6 7v2.5M10 7v2.5M14 7v2.5"/></svg>
+      <svg class="ic ln" style="left:calc(var(--u)*68);color:#8b5cf6" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16.5l.8-3.6 9-9 2.8 2.8-9 9zM3 18h14"/></svg>
+      <svg class="ic ln" style="left:calc(var(--u)*102)" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.5" r="2.6"/><path d="M5.5 17l1.5-6.5h6l1.5 6.5M8 13.5h4"/></svg>
+      <svg class="ic ln" style="left:calc(var(--u)*121);width:calc(var(--u)*10)" viewBox="0 0 10 20" aria-hidden="true"><path d="M2.5 9 5 11.5 7.5 9"/></svg>
+      <hr>
+      <button id="next" aria-label="Next collection"><svg class="ln" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+    </div>
+
+    <div id="steps" role="group" aria-label="Choose collection"></div>
+    <button id="play" aria-label="Pause autoplay" aria-pressed="false"><svg class="ln" viewBox="0 0 20 20" aria-hidden="true"><path id="pi" d="M7 5v10M13 5v10"/></svg></button>
+  </section>
+  <p class="credit">Inspired by <a href="https://dribbble.com/shots/16460483-Cake-Couch" rel="noopener">Cake Couch</a> by Cosmin Capitanu. Original SVG artwork, no copied assets.</p>
+</main>
+  <footer class="sig">
+    <a class="start" href="https://hamzeh.framer.ai/?utm_source=cake-couch-animation&utm_medium=referral" target="_blank" rel="noopener">&copy; 2026 <strong>Hamzeh</strong></a>
+    <span class="mid">Powered by&nbsp;<strong>Claude</strong></span>
+    <span class="end">
+      <a href="https://github.com/HamzehGhoreyshi/cake-couch-animation" target="_blank" rel="noopener" aria-label="Source code on GitHub, by HamzehGhoreyshi"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><strong>HamzehGhoreyshi</strong></a>
+      <span class="dot" aria-hidden="true">&middot;</span>
+      <a href="https://github.com/HamzehGhoreyshi/cake-couch-animation" target="_blank" rel="noopener" aria-label="Star this project on GitHub"><svg class="star-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.751.751 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg><strong>Star</strong></a>
+    </span>
+  </footer>
+
+</body>
+</html>
