@@ -1,0 +1,354 @@
+<!doctype html>
+<html dir="rtl" lang="fa" data-zcode-design>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>گنجینهٔ UI — گالری زنده</title>
+<style>
+:root{
+  --bg:#101211;
+  --surface:#161817;
+  --surface-2:#1b1e1c;
+  --fg:#eef2ef;
+  --muted:#9aa49d;
+  --faint:#5f6a63;
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.16);
+  --accent:#ebffa5;
+  --accent-ink:#1a1d10;
+  --font-body:"Vazirmatn","IRANSansX","Segoe UI",Tahoma,sans-serif;
+  --font-mono:"Cascadia Mono",Consolas,ui-monospace,monospace;
+  --radius:14px;
+  --maxw:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important}
+}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font-family:var(--font-body);font-size:15px;line-height:1.65;
+}
+a{color:inherit}
+
+/* ---------- سرصفحه ---------- */
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(16,18,17,.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.head-inner{
+  max-width:var(--maxw);margin-inline:auto;
+  padding:18px 24px 10px;display:flex;flex-wrap:wrap;align-items:end;gap:10px 18px;
+}
+.eyebrow{
+  direction:ltr;unicode-bidi:isolate;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
+  color:var(--faint);text-transform:uppercase;margin-inline-end:auto;
+}
+.title-wrap{flex-basis:100%}
+h1{
+  margin:0;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:0;
+}
+h1 .count{
+  font-family:var(--font-mono);font-weight:400;font-size:18px;color:var(--muted);
+  margin-inline-start:10px;
+}
+.lede{margin:6px 0 0;color:var(--muted);font-size:14px}
+.tools{
+  flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  padding-block:6px 12px;
+}
+.search{
+  display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:7px 12px;min-width:230px;flex:1 1 230px;max-width:340px;
+}
+.search:focus-within{border-color:var(--accent)}
+.search svg{flex:none;color:var(--faint)}
+.search input{
+  all:unset;width:100%;font-family:var(--font-body);font-size:14px;color:var(--fg);
+}
+.search input::placeholder{color:var(--faint)}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{
+  all:unset;cursor:pointer;
+  font-size:13px;color:var(--muted);
+  border:1px solid var(--border);border-radius:999px;
+  padding:5px 12px;transition:color .15s,border-color .15s,background .15s;
+}
+.pill:hover{color:var(--fg);border-color:var(--border-strong)}
+.pill.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.pill .n{font-family:var(--font-mono);font-size:11px;opacity:.75;margin-inline-start:4px}
+
+/* ---------- بخش‌ها ---------- */
+main{max-width:var(--maxw);margin-inline:auto;padding:10px 24px 60px}
+section{padding-block:26px 6px;scroll-margin-top:120px}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:18px}
+.sec-head h2{margin:0;font-size:21px;font-weight:700}
+.sec-head .latin{
+  direction:ltr;unicode-bidi:isolate;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;color:var(--faint);text-transform:uppercase;
+}
+.sec-head .c{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-inline-start:auto}
+.sec-empty{color:var(--faint);font-size:13px;padding-block:8px}
+
+.grid{
+  display:grid;gap:14px;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+}
+figure.card{
+  all:unset;display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:border-color .15s,transform .15s;
+}
+figure.card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.preview{
+  position:relative;height:230px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--surface-2);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.preview.h-charts{height:220px}
+.preview.h-ind{height:210px}
+.preview.h-tog{height:300px}
+.preview.h-show{height:320px}
+.preview iframe{
+  width:100%;height:100%;border:0;display:block;background:transparent;
+}
+.card-meta{
+  display:flex;align-items:center;gap:8px;padding:10px 14px 12px;
+}
+.card-meta .fa{font-size:14px;font-weight:600}
+.card-meta .slug{
+  direction:ltr;unicode-bidi:isolate;
+  font-family:var(--font-mono);font-size:11px;color:var(--faint);
+  overflow-wrap:anywhere;text-align:end;
+}
+.src{
+  margin-inline-start:auto;flex:none;
+  font-size:11px;color:var(--muted);
+  border:1px solid var(--border);border-radius:999px;padding:2px 9px;
+}
+.note{
+  font-size:11px;color:var(--faint);padding:0 14px 12px;margin:0;
+}
+footer{
+  border-top:1px solid var(--border);
+  color:var(--faint);font-size:13px;
+}
+.foot-inner{max-width:var(--maxw);margin-inline:auto;padding:20px 24px 34px}
+.foot-inner a{color:var(--muted)}
+.no-result{
+  display:none;color:var(--faint);padding:30px 0;text-align:center;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <span class="eyebrow">ui-vault · live specimen shelf</span>
+    <div class="title-wrap">
+      <h1>گنجینهٔ UI <span class="count" id="total"></span></h1>
+      <p class="lede">همهٔ کامپوننت‌ها زنده‌اند؛ بر اساس کارکرد کنار هم چیده شده‌اند. جزئیات منبع هر آیتم در <a href="SOURCES.md">SOURCES.md</a></p>
+    </div>
+    <div class="tools">
+      <label class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <input id="q" type="search" placeholder="جستجو در نام یا اسلاگ…" aria-label="جستجوی کامپوننت">
+      </label>
+      <nav class="pills" id="pills" aria-label="دسته‌بندی کارکردی"></nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="no-result" id="no-result">چیزی با این عبارت پیدا نشد.</div>
+  <div id="sections"></div>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    مرجع شخصی؛ وضعیت حقوق هر منبع در <a href="SOURCES.md">SOURCES.md</a> — d3motion و cake-couch باید خصوصی بمانند · کامپوننت‌های Quix طبق اعلام سایت برای استفادهٔ شخصی و تجاری آزادند.
+    <br>کارت Cake Couch برای اجرای <bdi dir="ltr">art.svg</bdi> به سرور محلی نیاز دارد: <bdi dir="ltr">python -m http.server 4173</bdi>
+  </div>
+</footer>
+
+<script>
+const CATALOG = [
+  {cat:"charts", fa:"نمودارها", latin:"charts", h:"h-charts", items:[
+    {slug:"candlestick", name:"کندل‌استیک BTC/USD", src:"Quix", file:"component.html"},
+    {slug:"portfolio-donut", name:"دونات سبد سرمایه", src:"Quix", file:"component.html"},
+    {slug:"fear-greed", name:"شاخص ترس و طمع", src:"Quix", file:"component.html"},
+    {slug:"credit-score", name:"امتیاز اعتباری", src:"Quix", file:"component.html"},
+    {slug:"yield-curve", name:"منحنی بازده", src:"Quix", file:"component.html"},
+    {slug:"activity-heatmap", name:"هیت‌مپ فعالیت", src:"Quix", file:"component.html"},
+    {slug:"market-depth", name:"عمق بازار", src:"Quix", file:"component.html"},
+    {slug:"gas-tracker", name:"ردیاب کارمزد گس", src:"Quix", file:"component.html"},
+    {slug:"budget-bars", name:"میله‌های بودجه", src:"Quix", file:"component.html"},
+    {slug:"gradient-line", name:"خط گرادیانی", src:"Quix", file:"component.html"},
+    {slug:"savings-ring", name:"حلقهٔ پس‌انداز", src:"Quix", file:"component.html"},
+    {slug:"dominance-rings", name:"حلقه‌های سلطهٔ بازار", src:"Quix", file:"component.html"},
+    {slug:"stock-portfolio", name:"اسپارک‌لاین پرتفوی مالی", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"indicators", fa:"نشانگرها و گیج‌ها", latin:"indicators", h:"h-ind", items:[
+    {slug:"multi-arc-percent", name:"گیج درصدی سه‌قوسی", src:"Quix", file:"component.html"},
+    {slug:"block-ring", name:"حلقهٔ بلوکی درصد", src:"Quix", file:"component.html"},
+    {slug:"chunk-percent", name:"گیج درصدی تکه‌ای", src:"Quix", file:"component.html"},
+    {slug:"radial-bar-percent", name:"نوار پیشرفت شعاعی", src:"Quix", file:"component.html"},
+    {slug:"bar-glow", name:"نوار پیشرفت درخشان", src:"Quix", file:"component.html"},
+    {slug:"bar-ticks", name:"نوار پیشرفت تیک‌دار", src:"Quix", file:"component.html"},
+    {slug:"bar-chevron", name:"نوار پیشرفت شورون", src:"Quix", file:"component.html"},
+    {slug:"bar-stripes", name:"نوار پیشرفت راه‌راه", src:"Quix", file:"component.html"},
+    {slug:"bar-spark", name:"نوار پیشرفت جرقه‌ای", src:"Quix", file:"component.html"},
+    {slug:"bar-streak", name:"نوار پیشرفت رگهٔ نور", src:"Quix", file:"component.html"},
+    {slug:"bar-dots", name:"نوار پیشرفت نقطه‌ای", src:"Quix", file:"component.html"},
+    {slug:"bar-dot-sparkle", name:"نوار نقطه‌ای درخشان", src:"Quix", file:"component.html"},
+    {slug:"streak-tracker", name:"ردیاب استریک روزانه", src:"d3motion", file:"component.html"},
+    {slug:"collaborator-presence", name:"حضور زندهٔ همکاران", src:"d3motion", file:"component.html"},
+    {slug:"activity-rings", name:"حلقه‌های پیشرفت", src:"d3motion", file:"component.html"},
+    {slug:"countdown-timer", name:"تایمر تمرکز (پومودورو)", src:"d3motion", file:"component.html"},
+    {slug:"battery-monitor", name:"مانیتور باتری چنددستگاهی", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"toggles", fa:"سوییچ‌ها", latin:"toggles", h:"h-tog", items:[
+    {slug:"day-night-switch", name:"سوییچ شب و روز", src:"VibeHub", file:"demo.html"},
+    {slug:"theme-toggle", name:"سوییچ شب و روز d3motion", src:"d3motion", file:"component.html"},
+    {slug:"pricing-toggle", name:"سوییچ پلن قیمت", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"buttons", fa:"دکمه‌ها", latin:"buttons", h:"", items:[
+    {slug:"deploy-button", name:"دکمهٔ دیپلوی مورف‌شونده", src:"d3motion", file:"component.html"},
+    {slug:"social-heart-like", name:"دکمهٔ لایک قلب", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"cards", fa:"کارت‌ها", latin:"cards", h:"", items:[
+    {slug:"music-player", name:"پلیر موسیقی Now Playing", src:"d3motion", file:"component.html"},
+    {slug:"weather-clock", name:"ساعت جهانی و آب‌وهوا", src:"d3motion", file:"component.html"},
+    {slug:"notification-stack", name:"مرکز اعلان انباشته", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"inputs", fa:"ورودی‌ها", latin:"inputs", h:"", items:[
+    {slug:"otp-verification", name:"تأیید کد ۶ رقمی OTP", src:"d3motion", file:"component.html"},
+    {slug:"volume-brightness-sliders", name:"اسلایدر صدا و روشنایی", src:"d3motion", file:"component.html"},
+    {slug:"color-picker", name:"انتخابگر رنگ HSL", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"navigation", fa:"ناوبری", latin:"navigation", h:"", items:[
+    {slug:"segmented-control", name:"کنترل ناوبری سگمنتی", src:"d3motion", file:"component.html"},
+    {slug:"weekly-calendar", name:"نوار تقویم هفتگی", src:"d3motion", file:"component.html"},
+    {slug:"route-navigation", name:"ناوبری زندهٔ GPS", src:"d3motion", file:"component.html"},
+    {slug:"command-palette", name:"کامند پلت ⌘K", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"interactions", fa:"تعاملات", latin:"interactions", h:"", items:[
+    {slug:"task-checklist", name:"چک‌لیست تعاملی", src:"d3motion", file:"component.html"},
+    {slug:"file-upload", name:"پیشرفت آپلود فایل", src:"d3motion", file:"component.html"},
+    {slug:"chat-stream", name:"جریان چت زنده", src:"d3motion", file:"component.html"},
+    {slug:"kanban-board", name:"برد کانبان اسپرینت", src:"d3motion", file:"component.html"},
+  ]},
+  {cat:"showcase", fa:"ویترین محصول", latin:"showcase", h:"h-show", items:[
+    {slug:"cake-couch", name:"Cake Couch — نمایش محصول انیمیشنی", src:"GitHub", file:"index.html", note:"برای بارگذاری art.svg به سرور محلی نیاز دارد"},
+  ]},
+];
+
+const faNum = n => n.toLocaleString("fa-IR");
+
+// سرصفحه
+const total = CATALOG.reduce((a, c) => a + c.items.length, 0);
+document.getElementById("total").textContent = "· " + faNum(total) + " آیتم زنده";
+
+const pills = document.getElementById("pills");
+for (const c of CATALOG) {
+  const b = document.createElement("button");
+  b.className = "pill";
+  b.href = "#" + c.cat;
+  b.textContent = c.fa;
+  const n = document.createElement("span");
+  n.className = "n"; n.textContent = faNum(c.items.length);
+  b.append(n);
+  b.addEventListener("click", () => {
+    document.querySelectorAll(".pill.active").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    document.getElementById(c.cat).scrollIntoView({behavior:"smooth"});
+  });
+  pills.append(b);
+}
+pills.firstElementChild.classList.add("active");
+
+// بخش‌ها و کارت‌ها
+const wrap = document.getElementById("sections");
+for (const c of CATALOG) {
+  const sec = document.createElement("section");
+  sec.id = c.cat;
+  const head = document.createElement("div");
+  head.className = "sec-head";
+  const h2 = document.createElement("h2"); h2.textContent = c.fa;
+  const latin = document.createElement("span"); latin.className = "latin"; latin.textContent = c.latin;
+  const cnt = document.createElement("span"); cnt.className = "c"; cnt.textContent = faNum(c.items.length);
+  head.append(h2, latin, cnt);
+  const grid = document.createElement("div"); grid.className = "grid";
+  for (const it of c.items) {
+    const fig = document.createElement("figure");
+    fig.className = "card";
+    fig.dataset.fa = it.name;
+    fig.dataset.slug = it.slug;
+    const pv = document.createElement("div");
+    pv.className = "preview " + (c.h || "");
+    const fr = document.createElement("iframe");
+    fr.loading = "lazy";
+    fr.title = it.name;
+    fr.setAttribute("referrerpolicy", "no-referrer");
+    fr.dataset.src = `${c.cat}/${it.slug}/${it.file}`;
+    pv.append(fr);
+    const meta = document.createElement("div");
+    meta.className = "card-meta";
+    const name = document.createElement("span"); name.className = "fa"; name.textContent = it.name;
+    const slug = document.createElement("span"); slug.className = "slug"; slug.textContent = it.slug;
+    const src = document.createElement("span"); src.className = "src"; src.textContent = it.src;
+    meta.append(name, slug, src);
+    fig.append(pv, meta);
+    if (it.note) {
+      const note = document.createElement("p");
+      note.className = "note"; note.textContent = it.note;
+      fig.append(note);
+    }
+    grid.append(fig);
+  }
+  sec.append(head, grid);
+  wrap.append(sec);
+}
+
+// بارگذاری تنبل iframe ها
+const io = new IntersectionObserver(entries => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      const fr = e.target;
+      if (!fr.src) fr.src = fr.dataset.src;
+      io.unobserve(fr);
+    }
+  }
+}, {rootMargin: "400px"});
+document.querySelectorAll("iframe[data-src]").forEach(fr => io.observe(fr));
+
+// جستجو
+const q = document.getElementById("q");
+const noResult = document.getElementById("no-result");
+q.addEventListener("input", () => {
+  const t = q.value.trim().toLowerCase();
+  let visible = 0;
+  for (const sec of wrap.querySelectorAll("section")) {
+    let secVisible = 0;
+    for (const card of sec.querySelectorAll(".card")) {
+      const hit = !t
+        || card.dataset.fa.toLowerCase().includes(t)
+        || card.dataset.slug.toLowerCase().includes(t);
+      card.style.display = hit ? "" : "none";
+      if (hit) { secVisible++; visible++; }
+    }
+    sec.style.display = secVisible ? "" : "none";
+  }
+  noResult.style.display = visible ? "none" : "block";
+});
+</script>
+</body>
+</html>

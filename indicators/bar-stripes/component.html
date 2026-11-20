@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bar Stripes — Quix Studio Component</title>
+<style>
+  html,body{margin:0;height:100%}
+  body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#101211;color:#e8f2ff;font-family:-apple-system,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,sans-serif}
+  .label{font-size:13px;letter-spacing:.5px;color:rgba(232,242,255,.5)}
+</style>
+</head>
+<body>
+<lp-loader type="bar-stripes" size="320"></lp-loader>
+<div class="label">Bar Stripes</div>
+<script>
+(function(){
+const TAU = Math.PI * 2, TOP = -Math.PI / 2, PI = Math.PI;
+const FONT = '-apple-system,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,sans-serif';
+let x;
+const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const eo3 = t => 1 - Math.pow(1 - t, 3);
+const fr = v => v - Math.floor(v);
+const acc = (t, p, k = .1) => t / p + k * Math.sin(TAU * t / p);
+const hexCache = {};
+function toHex(c) {
+if (hexCache[c]) return hexCache[c];
+let h = c;
+if (/^#[0-9a-f]{3}$/i.test(c)) h = '#' + [...c.slice(1)].map(k => k + k).join('');
+else if (!/^#[0-9a-f]{6}$/i.test(c)) { const k = document.createElement('canvas').getContext('2d'); k.fillStyle = '#000'; k.fillStyle = c; h = k.fillStyle; }
+return (hexCache[c] = h);
+}
+function rgba(h, a) { const n = parseInt(toHex(h).slice(1), 16); return `rgba(${n >> 16},${n >> 8 & 255},${n & 255},${cl(a)})`; }
+function polar(r, a) { return [r * Math.cos(a), r * Math.sin(a)]; }
+function arc(r, a0, a1, w, c, cap = 'butt') { x.beginPath(); x.arc(0, 0, r, a0, a1); x.lineWidth = w; x.strokeStyle = c; x.lineCap = cap; x.stroke(); }
+const segArc = (r, a0, a1, w, c) => arc(r, a0, a1, w, c);
+function dot(px, py, r, c) { x.beginPath(); x.arc(px, py, Math.max(.01, r), 0, TAU); x.fillStyle = c; x.fill(); }
+function add(f) { x.save(); x.globalCompositeOperation = 'lighter'; f(); x.restore(); }
+function cometArc(r, head, len, w, h, steps = 60, a = 1, dir = 1) { for (let k = 0; k < steps; k++) { const f = k / steps, p = head - dir * f * len, q = p - dir * (len / steps + .004); segArc(r, Math.min(p, q), Math.max(p, q), w, rgba(h, a * Math.pow(1 - f, 1.6))); } }
+function trail(i, n, head, len) { const d = fr((head - i) / n) * n; return d < len ? Math.pow(1 - d / len, 1.5) : 0; }
+function flare(px, py, s, a = 1, tw = 0) {
+add(() => {
+dot(px, py, s * .42, rgba('#FFFFFF', a));
+const L = s * (2.4 + .5 * Math.sin(tw));
+const g = x.createLinearGradient(px - L, py, px + L, py); g.addColorStop(0, rgba('#FFFFFF', 0)); g.addColorStop(.5, rgba('#FFFFFF', .85 * a)); g.addColorStop(1, rgba('#FFFFFF', 0));
+x.fillStyle = g; x.fillRect(px - L, py - .7, 2 * L, 1.4);
+const g2 = x.createLinearGradient(px, py - L * .6, px, py + L * .6); g2.addColorStop(0, rgba('#FFFFFF', 0)); g2.addColorStop(.5, rgba('#FFFFFF', .7 * a)); g2.addColorStop(1, rgba('#FFFFFF', 0));
+x.fillStyle = g2; x.fillRect(px - .6, py - L * .6, 1.2, L * 1.2);
+});
+}
+function txt(s, px, py, size, c, wt = 600) { x.font = `${wt} ${size}px ${FONT}`; x.letterSpacing = '1px'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillStyle = c; x.fillText(s, px + .5, py + .5); x.letterSpacing = '0px'; }
+function ltxt(s, px, py, size, c, t, wt = 500, sp = 1.6) {
+if (!s) return;
+x.font = `${wt} ${size}px ${FONT}`; x.letterSpacing = '0px'; x.textAlign = 'left'; x.textBaseline = 'middle';
+const ch = [...s], ws = ch.map(k => x.measureText(k).width), tot = ws.reduce((a, b) => a + b, 0) + sp * (ch.length - 1);
+let cx = px - tot / 2;
+ch.forEach((k, i) => {
+let a;
+if (k === '.') { const f = fr(t * 1.4 - i * .18); a = .25 + .75 * (f < .5 ? 1 : 0) * Math.sin(PI * f * 2) ** 2; }
+else { const ph = fr(t * .55 - i / ch.length * .45); a = .55 + .45 * Math.exp(-(((ph - .5) * 7) ** 2)); }
+x.fillStyle = rgba(c, a); x.fillText(k, cx, py + .5); cx += ws[i] + sp;
+});
+}
+const C = (o, d) => o.color || d;
+const tintCache = {};
+function tint(c, k) { const key = c + k; if (tintCache[key]) return tintCache[key]; const n = parseInt(toHex(c).slice(1), 16), m = v => Math.round(v + (255 - v) * k).toString(16).padStart(2, '0'); return (tintCache[key] = '#' + m(n >> 16) + m(n >> 8 & 255) + m(n & 255)); }
+const LT = (o, d) => o.color ? tint(o.color, .65) : d;
+const T = (o, d) => o.text != null ? o.text : d;
+const V = (o, t, target, dl = .3, d = 3.2) => o.v != null ? cl(o.v, 0, 100) : target * eo3(cl((t - dl) / d));
+const pctTxt = (v, size, c) => txt(Math.round(v) + '%', 0, 1, size, c, 600);
+function rr(px, py, w, h, r) { x.beginPath(); x.roundRect(px, py, w, h, r); }
+const BL = '#2FA8FF', CY = '#3CE6F2', TE = '#2ED8C3', LI = '#C8F04A', OR = '#FF9A2E';
+const LOADERS = {
+'bar-stripes': { box: 'bar', percent: 52, draw(t, o, X, Y, w) {
+const v = V(o, t, 52, .5), fw = (w - 6) * v / 100, c = C(o, '#9FF6FF');
+rr(X, Y - 9, w, 18, 9); x.lineWidth = 1.4; x.strokeStyle = rgba(c, .55); x.stroke();
+x.save(); rr(X + 3, Y - 6, Math.max(1, fw), 12, 6); x.clip(); x.fillStyle = rgba(c, .3); x.fillRect(X, Y - 6, w, 12); x.fillStyle = rgba(c, .85);
+for (let s = -20; s < w + 20; s += 12) { const sx = X + s + fr(t * 1.2) * 12; x.beginPath(); x.moveTo(sx, Y + 6); x.lineTo(sx + 6, Y + 6); x.lineTo(sx + 12, Y - 6); x.lineTo(sx + 6, Y - 6); x.closePath(); x.fill(); }
+x.restore(); txt(Math.round(v) + '%', cl(X + 3 + fw, X + 16, X + w - 16), Y - 24, 13, C(o, '#8FEFEF'), 500); } },
+};
+for (const k in LOADERS) LOADERS[k].setCtx = c => { x = c; };
+const REG = window.__lpLoaders = Object.assign(window.__lpLoaders || {}, LOADERS);
+const BOX = { c: [120, 120, 60], cb: [120, 144, 62] };
+const live = new Set();
+let raf = 0, last = 0;
+function loop(now) {
+const dt = Math.min(.1, (now - last) / 1000); last = now;
+for (const el of live) el._tick(dt);
+raf = live.size ? requestAnimationFrame(loop) : 0;
+}
+class LPLoader extends HTMLElement {
+static get observedAttributes() { return ['type', 'size', 'color', 'speed', 'value', 'text', 'paused']; }
+constructor() {
+super();
+const s = this.attachShadow({ mode: 'open' });
+s.innerHTML = '<style>:host{display:inline-block;line-height:0;vertical-align:middle}canvas{display:block}</style><canvas part="canvas"></canvas>';
+this._cv = s.querySelector('canvas'); this._ctx = this._cv.getContext('2d'); this._t = 0; this._v = null;
+}
+connectedCallback() {
+if (!this.hasAttribute('role')) this.setAttribute('role', 'progressbar');
+this._setup(); live.add(this);
+if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); }
+}
+disconnectedCallback() { live.delete(this); }
+attributeChangedCallback() { if (this.isConnected) this._setup(); }
+_setup() {
+const L = REG[this.getAttribute('type')] || REG.comet || Object.values(REG)[0], bar = L.box === 'bar';
+const size = parseFloat(this.getAttribute('size')) || (bar ? 400 : 120);
+const [bw, bh, cy] = BOX[L.box] || BOX.c;
+const w = size, h = bar ? 64 : size * bh / bw, d = window.devicePixelRatio || 1;
+Object.assign(this, { _L: L, _w: w, _h: h, _cy: cy, _d: d, _s: size / bw });
+if (this._cv.width !== Math.round(w * d) || this._cv.height !== Math.round(h * d)) { this._cv.width = Math.round(w * d); this._cv.height = Math.round(h * d); }
+this._cv.style.width = w + 'px'; this._cv.style.height = h + 'px';
+const val = this.getAttribute('value');
+this.setAttribute('aria-label', this.getAttribute('text') || 'Loading');
+if (val != null && val !== '') { this.setAttribute('aria-valuenow', Math.round(+val)); this.setAttribute('aria-valuemin', 0); this.setAttribute('aria-valuemax', 100); }
+else { this.removeAttribute('aria-valuenow'); }
+this._draw();
+}
+_tick(dt) {
+const want = REG[this.getAttribute('type')];
+if (want && want !== this._L) this._setup();
+if (!this.hasAttribute('paused')) this._t += dt * (parseFloat(this.getAttribute('speed')) || 1);
+const val = this.getAttribute('value');
+if (val != null && val !== '') { const tv = cl(+val, 0, 100); if (this._v == null) this._v = 0; this._v += (tv - this._v) * (1 - Math.exp(-dt * 6)); }
+else this._v = null;
+this._draw();
+}
+_draw() {
+const c = this._ctx, d = this._d, o = { color: this.getAttribute('color') || null, text: this.getAttribute('text'), v: this._v };
+c.setTransform(d, 0, 0, d, 0, 0); c.clearRect(0, 0, this._w, this._h); c.globalAlpha = 1; this._L.setCtx(c);
+if (this._L.box === 'bar') this._L.draw(this._t, o, 8, 40, this._w - 16);
+else { c.translate(this._w / 2, this._cy * this._s); c.scale(this._s, this._s); this._L.draw(this._t, o); }
+}
+}
+if (!customElements.get('lp-loader')) customElements.define('lp-loader', LPLoader);
+window.LoaderPack = Object.assign(window.LoaderPack || {}, {
+get types() { return Object.keys(REG); },
+get info() { return Object.fromEntries(Object.entries(REG).map(([k, v]) => [k, { bar: v.box === 'bar', percent: v.percent || null }])); },
+});
+})();
+</script>
+
+</body>
+</html>
