@@ -1,182 +1,270 @@
 <!doctype html>
-<html dir="rtl" lang="fa" data-zcode-design>
+<html dir="rtl" lang="fa">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
-<title>گنجینهٔ UI — گالری زنده</title>
+<title>گنجینهٔ UI — ui-vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#101211;
-  --surface:#161817;
-  --surface-2:#1b1e1c;
-  --fg:#eef2ef;
-  --muted:#9aa49d;
-  --faint:#5f6a63;
-  --border:rgba(255,255,255,.08);
-  --border-strong:rgba(255,255,255,.16);
-  --accent:#ebffa5;
-  --accent-ink:#1a1d10;
-  --font-body:"Vazirmatn","IRANSansX","Segoe UI",Tahoma,sans-serif;
-  --font-mono:"Cascadia Mono",Consolas,ui-monospace,monospace;
-  --radius:14px;
-  --maxw:1240px;
+  --bg:#090A0D;
+  --surface:#111318;
+  --surface-2:#171A21;
+  --surface-hover:#1D212A;
+  --fg:#F1F4F9;
+  --muted:#94A3B8;
+  --faint:#64748B;
+  --border:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.16);
+  --accent:#38BDF8;
+  --accent-glow:rgba(56,189,248,0.25);
+  --font-body:"Vazirmatn","Plus Jakarta Sans",system-ui,-apple-system,sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Consolas,monospace;
+  --radius:16px;
+  --maxw:1320px;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *{transition:none !important}
 }
 body{
-  margin:0;background:var(--bg);color:var(--fg);
-  font-family:var(--font-body);font-size:15px;line-height:1.65;
+  background:var(--bg);color:var(--fg);
+  font-family:var(--font-body);font-size:14px;line-height:1.6;
+  min-height:100vh;display:flex;flex-direction:column;
 }
-a{color:inherit}
+a{color:inherit;text-decoration:none}
 
-/* ---------- سرصفحه ---------- */
+/* ---------- هدر شیشه‌ای مدرن ---------- */
 header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(16,18,17,.88);backdrop-filter:blur(10px);
+  position:sticky;top:0;z-index:50;
+  background:rgba(9,10,13,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
 }
 .head-inner{
-  max-width:var(--maxw);margin-inline:auto;
-  padding:18px 24px 10px;display:flex;flex-wrap:wrap;align-items:end;gap:10px 18px;
+  max-width:var(--maxw);margin:0 auto;
+  padding:16px 24px 10px;display:flex;flex-direction:column;gap:14px;
 }
-.eyebrow{
-  direction:ltr;unicode-bidi:isolate;
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
-  color:var(--faint);text-transform:uppercase;margin-inline-end:auto;
+.top-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
-.title-wrap{flex-basis:100%}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-icon{
+  width:32px;height:32px;border-radius:10px;
+  background:linear-gradient(135deg, #38BDF8, #818CF8);
+  display:flex;align-items:center;justify-content:center;
+  color:#090A0D;font-weight:800;font-size:15px;box-shadow:0 0 20px rgba(56,189,248,0.4);
+}
 h1{
-  margin:0;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:0;
+  font-size:20px;font-weight:800;letter-spacing:-0.4px;
+  display:flex;align-items:center;gap:8px;
 }
 h1 .count{
-  font-family:var(--font-mono);font-weight:400;font-size:18px;color:var(--muted);
-  margin-inline-start:10px;
+  font-family:var(--font-mono);font-size:12px;font-weight:600;
+  color:var(--accent);background:rgba(56,189,248,0.12);
+  padding:2px 8px;border-radius:20px;border:1px solid rgba(56,189,248,0.25);
 }
-.lede{margin:6px 0 0;color:var(--muted);font-size:14px}
+.ext-links{display:flex;align-items:center;gap:12px}
+.github-link{
+  display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);
+  padding:6px 12px;border-radius:8px;border:1px solid var(--border);
+  transition:all 0.2s;background:var(--surface);
+}
+.github-link:hover{color:#FFF;border-color:var(--border-strong);background:var(--surface-2)}
+
+/* ابزارهای سرچ و فیلتر */
 .tools{
-  flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px;
-  padding-block:6px 12px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
 }
-.search{
-  display:flex;align-items:center;gap:8px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:10px;padding:7px 12px;min-width:230px;flex:1 1 230px;max-width:340px;
+.search-box{
+  position:relative;display:flex;align-items:center;flex:1 1 260px;max-width:380px;
 }
-.search:focus-within{border-color:var(--accent)}
-.search svg{flex:none;color:var(--faint)}
-.search input{
-  all:unset;width:100%;font-family:var(--font-body);font-size:14px;color:var(--fg);
+.search-icon{
+  position:absolute;right:12px;color:var(--faint);pointer-events:none;
 }
-.search input::placeholder{color:var(--faint)}
-.pills{display:flex;flex-wrap:wrap;gap:6px}
+.search-input{
+  width:100%;background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:9px 36px 9px 48px;
+  font-family:var(--font-body);font-size:13px;color:var(--fg);
+  outline:none;transition:all 0.2s;
+}
+.search-input:focus{
+  border-color:var(--accent);background:var(--surface-2);
+  box-shadow:0 0 16px var(--accent-glow);
+}
+.kbd-shortcut{
+  position:absolute;left:10px;font-family:var(--font-mono);font-size:10px;
+  color:var(--faint);background:rgba(255,255,255,0.06);
+  padding:2px 6px;border-radius:6px;border:1px solid var(--border);
+}
+.pills-scroll{
+  display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:6px;
+  scrollbar-width:none;-ms-overflow-style:none;flex:1 1 100%;
+}
+.pills-scroll::-webkit-scrollbar{display:none}
 .pill{
-  all:unset;cursor:pointer;
-  font-size:13px;color:var(--muted);
-  border:1px solid var(--border);border-radius:999px;
-  padding:5px 12px;transition:color .15s,border-color .15s,background .15s;
+  flex-shrink:0;cursor:pointer;font-size:12px;font-weight:500;
+  color:var(--muted);background:var(--surface);
+  border:1px solid var(--border);border-radius:20px;
+  padding:5px 12px;transition:all 0.2s;display:flex;align-items:center;gap:6px;
 }
-.pill:hover{color:var(--fg);border-color:var(--border-strong)}
-.pill.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
-.pill .n{font-family:var(--font-mono);font-size:11px;opacity:.75;margin-inline-start:4px}
+.pill:hover{color:#FFF;border-color:var(--border-strong);background:var(--surface-2)}
+.pill.active{
+  background:var(--accent);color:#090A0D;border-color:var(--accent);
+  font-weight:700;box-shadow:0 0 14px var(--accent-glow);
+}
+.pill .badge{
+  font-family:var(--font-mono);font-size:10px;opacity:0.8;
+}
 
-/* ---------- بخش‌ها ---------- */
-main{max-width:var(--maxw);margin-inline:auto;padding:10px 24px 60px}
-section{padding-block:26px 6px;scroll-margin-top:120px}
-.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:18px}
-.sec-head h2{margin:0;font-size:21px;font-weight:700}
+/* ---------- محتوای اصلی ---------- */
+main{max-width:var(--maxw);margin:0 auto;padding:24px 24px 80px;width:100%}
+section{padding-block:16px 8px;scroll-margin-top:140px}
+.sec-head{
+  display:flex;align-items:baseline;gap:12px;
+  border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:20px;
+}
+.sec-head h2{font-size:18px;font-weight:700;letter-spacing:-0.2px}
 .sec-head .latin{
-  direction:ltr;unicode-bidi:isolate;
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;color:var(--faint);text-transform:uppercase;
+  direction:ltr;font-family:var(--font-mono);font-size:11px;
+  color:var(--faint);text-transform:uppercase;letter-spacing:1px;
 }
-.sec-head .c{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-inline-start:auto}
-.sec-empty{color:var(--faint);font-size:13px;padding-block:8px}
+.sec-head .c{
+  font-family:var(--font-mono);font-size:11px;color:var(--muted);
+  margin-inline-start:auto;background:var(--surface-2);padding:2px 8px;border-radius:12px;
+}
 
+/* شبکه کارت‌ها */
 .grid{
-  display:grid;gap:14px;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  display:grid;gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
 }
 figure.card{
-  all:unset;display:flex;flex-direction:column;
+  display:flex;flex-direction:column;
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;transition:border-color .15s,transform .15s;
+  overflow:hidden;transition:all 0.25s cubic-bezier(0.16,1,0.3,1);position:relative;
 }
-figure.card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+figure.card:hover{
+  border-color:var(--border-strong);transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.5);
+}
 .preview{
   position:relative;height:230px;
   display:flex;align-items:center;justify-content:center;
-  background:var(--surface-2);
-  border-bottom:1px solid var(--border);
-  overflow:hidden;
+  background:radial-gradient(circle at center, #171A21 0%, #0F1116 100%);
+  border-bottom:1px solid var(--border);overflow:hidden;
 }
 .preview.h-charts{height:220px}
 .preview.h-ind{height:210px}
-.preview.h-tog{height:300px}
-.preview.h-glass{height:300px}
-.preview.h-show{height:320px}
+.preview.h-tog{height:280px}
+.preview.h-glass{height:280px}
+.preview.h-show{height:300px}
 .preview iframe{
   width:100%;height:100%;border:0;display:block;background:transparent;
 }
-.card-meta{
-  display:flex;align-items:center;gap:8px;padding:10px 14px 12px;
+
+/* پاورقی و دکمه‌های کارت */
+.card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 14px;background:var(--surface);gap:8px;
 }
-.card-meta .fa{font-size:14px;font-weight:600}
-.card-meta .slug{
-  direction:ltr;unicode-bidi:isolate;
-  font-family:var(--font-mono);font-size:11px;color:var(--faint);
-  overflow-wrap:anywhere;text-align:end;
+.card-info{display:flex;flex-direction:column;min-width:0;flex:1}
+.card-info .fa{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-info .slug{
+  direction:ltr;text-align:right;font-family:var(--font-mono);font-size:10px;
+  color:var(--faint);margin-top:1px;
 }
-.src{
-  margin-inline-start:auto;flex:none;
-  font-size:11px;color:var(--muted);
-  border:1px solid var(--border);border-radius:999px;padding:2px 9px;
+.card-actions{display:flex;align-items:center;gap:6px}
+.src-tag{
+  font-size:10px;font-family:var(--font-mono);padding:2px 8px;border-radius:6px;
+  border:1px solid var(--border);background:var(--surface-2);color:var(--muted);
 }
-.note{
-  font-size:11px;color:var(--faint);padding:0 14px 12px;margin:0;
+.src-tag.tag-Quix{color:#38BDF8;border-color:rgba(56,189,248,0.2)}
+.src-tag.tag-d3motion{color:#818CF8;border-color:rgba(129,140,248,0.2)}
+.src-tag.tag-LiquidGlass{color:#34D399;border-color:rgba(52,211,153,0.2)}
+.src-tag.tag-Handbook{color:#F472B6;border-color:rgba(244,114,182,0.2)}
+.src-tag.tag-VibePrompt{color:#FBBF24;border-color:rgba(251,191,36,0.2)}
+
+.btn-icon{
+  width:28px;height:28px;border-radius:8px;background:var(--surface-2);
+  border:1px solid var(--border);color:var(--muted);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:all 0.2s;text-decoration:none;
 }
+.btn-icon:hover{color:#FFF;background:var(--surface-hover);border-color:var(--border-strong)}
+
+/* فوتر */
 footer{
-  border-top:1px solid var(--border);
-  color:var(--faint);font-size:13px;
+  margin-top:auto;border-top:1px solid var(--border);
+  background:var(--surface);color:var(--faint);font-size:12px;
 }
-.foot-inner{max-width:var(--maxw);margin-inline:auto;padding:20px 24px 34px}
-.foot-inner a{color:var(--muted)}
+.foot-inner{
+  max-width:var(--maxw);margin:0 auto;padding:24px;
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
+}
+.foot-inner a{color:var(--muted);text-decoration:underline}
 .no-result{
-  display:none;color:var(--faint);padding:30px 0;text-align:center;
+  display:none;color:var(--muted);padding:60px 0;text-align:center;font-size:15px;
 }
+
+/* توئست کپی */
+.copy-toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);
+  background:#10B981;color:#FFF;padding:8px 16px;border-radius:20px;
+  font-size:12px;font-weight:600;box-shadow:0 8px 24px rgba(16,185,129,0.3);
+  pointer-events:none;opacity:0;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);z-index:100;
+}
+.copy-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 </style>
 </head>
 <body>
 
 <header>
   <div class="head-inner">
-    <span class="eyebrow">ui-vault · live specimen shelf</span>
-    <div class="title-wrap">
-      <h1>گنجینهٔ UI <span class="count" id="total"></span></h1>
-      <p class="lede">همهٔ کامپوننت‌ها زنده‌اند؛ بر اساس کارکرد کنار هم چیده شده‌اند. جزئیات منبع هر آیتم در <a href="SOURCES.md">SOURCES.md</a></p>
+    <div class="top-bar">
+      <div class="brand">
+        <div class="logo-icon">UI</div>
+        <div>
+          <h1>گنجینهٔ UI <span class="count" id="total"></span></h1>
+        </div>
+      </div>
+      <div class="ext-links">
+        <a class="github-link" href="SOURCES.md">
+          <span>منابع و حقوق</span>
+        </a>
+        <a class="github-link" href="https://github.com/ahmadkhanloo/ui-vault" target="_blank" rel="noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+      </div>
     </div>
+
     <div class="tools">
-      <label class="search">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
-        <input id="q" type="search" placeholder="جستجو در نام یا اسلاگ…" aria-label="جستجوی کامپوننت">
-      </label>
-      <nav class="pills" id="pills" aria-label="دسته‌بندی کارکردی"></nav>
+      <div class="search-box">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input id="q" type="search" class="search-input" placeholder="جستجو در میان کامپوننت‌ها..." aria-label="جستجو">
+        <span class="kbd-shortcut">⌘K</span>
+      </div>
+      <nav class="pills-scroll" id="pills" aria-label="دسته‌بندی"></nav>
     </div>
   </div>
 </header>
 
 <main>
-  <div class="no-result" id="no-result">چیزی با این عبارت پیدا نشد.</div>
+  <div class="no-result" id="no-result">هیچ کامپوننتی مطابق با جستجوی شما یافت نشد.</div>
   <div id="sections"></div>
 </main>
 
+<div class="copy-toast" id="toast">مسیر فایل کپی شد!</div>
+
 <footer>
   <div class="foot-inner">
-    مرجع شخصی؛ وضعیت حقوق هر منبع در <a href="SOURCES.md">SOURCES.md</a> — d3motion و cake-couch باید خصوصی بمانند · کامپوننت‌های Quix طبق اعلام سایت برای استفادهٔ شخصی و تجاری آزادند · کیت <bdi dir="ltr">Liquid Glass</bdi> با لایسنس MIT آزاد است.
-    <br>کارت Cake Couch برای اجرای <bdi dir="ltr">art.svg</bdi> به سرور محلی نیاز دارد: <bdi dir="ltr">python -m http.server 4173</bdi>
+    <span>گنجینهٔ مرجع کامپوننت‌های زنده و انیمیشن‌دار رابط کاربری</span>
+    <span>جزئیات لایسنس و حقوق هر منبع در <a href="SOURCES.md">SOURCES.md</a></span>
   </div>
 </footer>
 
@@ -287,19 +375,24 @@ const CATALOG = [
 ];
 
 const faNum = n => n.toLocaleString("fa-IR");
+const toast = document.getElementById("toast");
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2000);
+}
 
-// سرصفحه
+// مقداردهی سرصفحه
 const total = CATALOG.reduce((a, c) => a + c.items.length, 0);
-document.getElementById("total").textContent = "· " + faNum(total) + " آیتم زنده";
+document.getElementById("total").textContent = faNum(total) + " آیتم زنده";
 
 const pills = document.getElementById("pills");
 for (const c of CATALOG) {
   const b = document.createElement("button");
   b.className = "pill";
-  b.href = "#" + c.cat;
   b.textContent = c.fa;
   const n = document.createElement("span");
-  n.className = "n"; n.textContent = faNum(c.items.length);
+  n.className = "badge"; n.textContent = faNum(c.items.length);
   b.append(n);
   b.addEventListener("click", () => {
     document.querySelectorAll(".pill.active").forEach(x => x.classList.remove("active"));
@@ -310,50 +403,79 @@ for (const c of CATALOG) {
 }
 pills.firstElementChild.classList.add("active");
 
-// بخش‌ها و کارت‌ها
+// رندر کارت‌ها
 const wrap = document.getElementById("sections");
 for (const c of CATALOG) {
   const sec = document.createElement("section");
   sec.id = c.cat;
+  
   const head = document.createElement("div");
   head.className = "sec-head";
   const h2 = document.createElement("h2"); h2.textContent = c.fa;
   const latin = document.createElement("span"); latin.className = "latin"; latin.textContent = c.latin;
   const cnt = document.createElement("span"); cnt.className = "c"; cnt.textContent = faNum(c.items.length);
   head.append(h2, latin, cnt);
+
   const grid = document.createElement("div"); grid.className = "grid";
   for (const it of c.items) {
+    const filePath = `${c.cat}/${it.slug}/${it.file}`;
     const fig = document.createElement("figure");
     fig.className = "card";
     fig.dataset.fa = it.name;
     fig.dataset.slug = it.slug;
+
     const pv = document.createElement("div");
     pv.className = "preview " + (c.h || "");
     const fr = document.createElement("iframe");
     fr.loading = "lazy";
     fr.title = it.name;
     fr.setAttribute("referrerpolicy", "no-referrer");
-    fr.dataset.src = `${c.cat}/${it.slug}/${it.file}`;
+    fr.dataset.src = filePath;
     pv.append(fr);
-    const meta = document.createElement("div");
-    meta.className = "card-meta";
+
+    const footer = document.createElement("div");
+    footer.className = "card-footer";
+
+    const info = document.createElement("div");
+    info.className = "card-info";
     const name = document.createElement("span"); name.className = "fa"; name.textContent = it.name;
     const slug = document.createElement("span"); slug.className = "slug"; slug.textContent = it.slug;
-    const src = document.createElement("span"); src.className = "src"; src.textContent = it.src;
-    meta.append(name, slug, src);
-    fig.append(pv, meta);
-    if (it.note) {
-      const note = document.createElement("p");
-      note.className = "note"; note.textContent = it.note;
-      fig.append(note);
-    }
+    info.append(name, slug);
+
+    const actions = document.createElement("div");
+    actions.className = "card-actions";
+
+    const srcTag = document.createElement("span");
+    srcTag.className = `src-tag tag-${it.src.replace(/\s+/g,'')}`;
+    srcTag.textContent = it.src;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "btn-icon";
+    copyBtn.title = "کپی مسیر فایل";
+    copyBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(filePath);
+      showToast("مسیر فایل کپی شد: " + filePath);
+    });
+
+    const openLink = document.createElement("a");
+    openLink.className = "btn-icon";
+    openLink.href = filePath;
+    openLink.target = "_blank";
+    openLink.title = "مشاهده تمام‌صفحه در تب جدید";
+    openLink.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+    actions.append(srcTag, copyBtn, openLink);
+    footer.append(info, actions);
+    fig.append(pv, footer);
     grid.append(fig);
   }
+
   sec.append(head, grid);
   wrap.append(sec);
 }
 
-// بارگذاری تنبل iframe ها
+// بارگذاری تنبل iframe
 const io = new IntersectionObserver(entries => {
   for (const e of entries) {
     if (e.isIntersecting) {
@@ -365,7 +487,7 @@ const io = new IntersectionObserver(entries => {
 }, {rootMargin: "400px"});
 document.querySelectorAll("iframe[data-src]").forEach(fr => io.observe(fr));
 
-// جستجو
+// جستجوی بلادرنگ
 const q = document.getElementById("q");
 const noResult = document.getElementById("no-result");
 q.addEventListener("input", () => {
@@ -383,6 +505,15 @@ q.addEventListener("input", () => {
     sec.style.display = secVisible ? "" : "none";
   }
   noResult.style.display = visible ? "none" : "block";
+});
+
+// کلید میانبر جستجو (Ctrl+K یا ⌘K)
+window.addEventListener("keydown", (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+    e.preventDefault();
+    q.focus();
+    q.select();
+  }
 });
 </script>
 </body>
