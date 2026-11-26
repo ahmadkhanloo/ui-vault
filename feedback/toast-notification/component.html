@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Interactive Toast Notification</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:100%;height:100vh;overflow:hidden;background:transparent!important;
+  display:flex;align-items:center;justify-content:center;
+  font-family:Inter,sans-serif;
+}
+.stage{
+  position:relative;width:260px;height:140px;display:flex;align-items:center;justify-content:center;
+}
+.toast{
+  position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:#181A20;border-radius:14px;border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 12px 30px rgba(0,0,0,0.5);width:230px;
+  animation:toastLifecycle 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+.icon{
+  width:24px;height:24px;border-radius:50%;background:#10B981;
+  display:flex;align-items:center;justify-content:center;color:#FFF;flex-shrink:0;
+}
+.content{
+  display:flex;flex-direction:column;gap:2px;
+}
+.msg{font-size:12px;font-weight:600;color:#F9FAFB}
+.time{font-size:10px;color:#9CA3AF}
+@keyframes toastLifecycle{
+  0%{transform:translateY(30px) scale(0.9);opacity:0}
+  15%,75%{transform:translateY(0) scale(1);opacity:1}
+  90%,100%{transform:translateY(-20px) scale(0.95);opacity:0}
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="toast">
+    <div class="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="content">
+      <span class="msg">Sync complete</span>
+      <span class="time">Just now &bull; Cloud Vault</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

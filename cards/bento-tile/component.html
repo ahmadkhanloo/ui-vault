@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Interactive Bento Tile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:100%;height:100vh;overflow:hidden;background:transparent!important;
+  display:flex;align-items:center;justify-content:center;
+  font-family:Inter,sans-serif;color:#FFF;
+}
+.tile{
+  width:260px;height:190px;background:#101216;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.08);padding:18px;position:relative;
+  display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 12px 32px rgba(0,0,0,0.5);overflow:hidden;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.tile:hover{
+  border-color:rgba(99,102,241,0.4);
+  box-shadow:0 16px 40px rgba(99,102,241,0.15);
+}
+.glow{
+  position:absolute;top:-40px;right:-40px;width:120px;height:120px;
+  border-radius:50%;background:radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
+  filter:blur(15px);pointer-events:none;
+}
+.head{display:flex;align-items:center;justify-content:space-between}
+.icon{
+  width:32px;height:32px;border-radius:10px;background:rgba(99,102,241,0.15);
+  border:1px solid rgba(99,102,241,0.3);color:#A5B4FC;
+  display:flex;align-items:center;justify-content:center;
+}
+.metric{
+  font-size:10px;font-weight:600;color:#34D399;background:rgba(52,211,153,0.12);
+  padding:3px 8px;border-radius:20px;border:1px solid rgba(52,211,153,0.25);
+}
+.body{margin-top:10px}
+.title{font-size:14px;font-weight:700;letter-spacing:-0.2px}
+.desc{font-size:11px;color:#94A3B8;margin-top:4px;line-height:1.4}
+.mini-chart{
+  display:flex;align-items:flex-end;gap:5px;height:36px;margin-top:10px;
+}
+.bar{
+  flex:1;background:rgba(255,255,255,0.08);border-radius:4px;
+  animation:barPulse 2s ease-in-out infinite alternate;
+}
+.bar:nth-child(1){height:40%;animation-delay:0.1s}
+.bar:nth-child(2){height:75%;animation-delay:0.3s;background:#6366F1}
+.bar:nth-child(3){height:55%;animation-delay:0.2s}
+.bar:nth-child(4){height:90%;animation-delay:0.4s;background:#818CF8}
+.bar:nth-child(5){height:65%;animation-delay:0.15s}
+@keyframes barPulse{
+  0%{transform:scaleY(0.85)}
+  100%{transform:scaleY(1.05)}
+}
+</style>
+</head>
+<body>
+<div class="tile">
+  <div class="glow"></div>
+  <div class="head">
+    <div class="icon">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <div class="metric">+42.8%</div>
+  </div>
+  <div class="body">
+    <div class="title">Autonomous Pipeline</div>
+    <div class="desc">Real-time edge metrics and load distribution.</div>
+  </div>
+  <div class="mini-chart">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+</div>
+</body>
+</html>

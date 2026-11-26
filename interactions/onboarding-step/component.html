@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Interactive Onboarding Tour Step</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:100%;height:100vh;overflow:hidden;background:transparent!important;
+  display:flex;align-items:center;justify-content:center;
+  font-family:Inter,sans-serif;color:#FFF;
+}
+.modal{
+  width:260px;padding:18px;background:#141720;border-radius:18px;
+  border:1px solid rgba(255,255,255,0.1);box-shadow:0 14px 40px rgba(0,0,0,0.6);
+  display:flex;flex-direction:column;gap:12px;position:relative;
+}
+.progress-dots{display:flex;gap:6px;align-items:center}
+.dot{width:18px;height:4px;border-radius:2px;background:rgba(255,255,255,0.15);transition:all 0.3s}
+.dot.active{background:#38BDF8;width:28px}
+.step-num{font-size:10px;font-weight:600;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px}
+.illustration{
+  width:100%;height:68px;background:linear-gradient(135deg, rgba(56,189,248,0.15), rgba(99,102,241,0.15));
+  border-radius:12px;border:1px dashed rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.pulse-circle{
+  width:32px;height:32px;border-radius:50%;background:#38BDF8;color:#0F172A;
+  display:flex;align-items:center;justify-content:center;
+  animation:ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.title{font-size:13px;font-weight:700}
+.desc{font-size:11px;color:#94A3B8;line-height:1.4}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.skip{font-size:11px;color:#64748B;cursor:pointer;background:none;border:none}
+.next{
+  padding:6px 14px;border-radius:8px;background:#38BDF8;border:none;
+  color:#0F172A;font-size:11px;font-weight:600;cursor:pointer;
+  transition:transform 0.15s;
+}
+.next:hover{transform:scale(1.04)}
+@keyframes ping{
+  75%, 100%{transform:scale(1.1);box-shadow:0 0 16px rgba(56,189,248,0.6)}
+}
+</style>
+</head>
+<body>
+<div class="modal">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div class="progress-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <span class="step-num">Step 1 of 3</span>
+  </div>
+  <div class="illustration">
+    <div class="pulse-circle">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+  </div>
+  <div>
+    <div class="title">Connect Cloud Engines</div>
+    <div class="desc">Link your AI orchestrators and configure shared sandboxes.</div>
+  </div>
+  <div class="actions">
+    <button class="skip">Skip tour</button>
+    <button class="next">Next &rarr;</button>
+  </div>
+</div>
+</body>
+</html>

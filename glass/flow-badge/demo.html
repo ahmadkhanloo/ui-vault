@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass — نشان شیشه‌ای (Flow)</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../glass.css">
+<style>
+  .stage { --ink:#16181a; --ink-soft:#4a5158; background: #eef0ee; }
+
+  .cluster { position: absolute; inset: 0; display: grid; place-items: center; }
+  .cluster .blob.a { width: 176px; height: 176px; transform: translate(-118px, -44px); background: #ff5a4d; }
+  .cluster .blob.b { width: 168px; height: 168px; transform: translate(112px, 30px); background: #2f6bff; }
+  .cluster .blob.c { width: 96px; height: 96px; transform: translate(10px, -96px); background: #22c9a4; }
+
+  /* The surface the badges sit on: the rim of the glass bends its edge. */
+  .surface {
+    position: relative;
+    width: 236px;
+    padding: 18px 18px 20px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid rgba(22, 24, 26, 0.08);
+    box-shadow: 0 14px 30px rgba(22, 24, 26, 0.07);
+  }
+  .surface h2 { margin: 0; font-size: 14px; font-weight: 650; letter-spacing: -0.01em; }
+  .surface p { margin: 5px 0 0; font-size: 11.5px; line-height: 1.55; color: #6a7178; }
+
+  /* ── GlassBadge: h-[22px] w-16, rounded-full, blue, 12px semibold ── */
+  .badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    width: 64px;
+    overflow: visible;
+    border-radius: 999px;
+    background: #3291ff;
+    color: #fff;
+    font: 600 12px/1 var(--font);
+    letter-spacing: -0.01em;
+  }
+  .badge.green { background: #16a34a; }
+  .badge.pink { background: #db2777; }
+
+  .badge .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  /* CSS fallback until the glass draws (and without WebGL2). */
+  .badge .fallback {
+    display: flex; width: 100%; overflow: hidden; border-radius: 999px;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+  }
+  .badge .fallback > span { display: flex; width: max-content; flex: none; align-items: center; }
+  .badge .fallback i { padding: 0 4px; font-style: normal; }
+  .badge .fallback b { width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+  @media (prefers-reduced-motion: reduce) { .badge .fallback { display: none; } }
+
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .pin { position: absolute; }
+  .pin.tr { top: -8px; right: -10px; }
+  .pin.bl { bottom: -9px; left: 14px; }
+
+  .caption { inset: auto 0 10px 0; font-size: 10.5px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="cluster" aria-hidden="true">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+    <div class="blob c"></div>
+  </div>
+
+  <div class="surface">
+    <h2 dir="ltr">Release notes</h2>
+    <p dir="ltr">Small glass drops pinned to a corner: the text flows through them.</p>
+
+    <div class="badges">
+      <span class="badge" data-glass-host>
+        <span class="sr-only">New</span>
+        <span class="fallback" aria-hidden="true" data-glass-fallback>
+          <span data-glass-marquee><i>New</i><b></b><i>New</i><b></b><i>New</i><b></b><i>New</i><b></b></span>
+        </span>
+      </span>
+      <span class="badge green" data-glass-host>
+        <span class="sr-only">Live</span>
+        <span class="fallback" aria-hidden="true" data-glass-fallback>
+          <span data-glass-marquee><i>Live</i><b></b><i>Live</i><b></b><i>Live</i><b></b><i>Live</i><b></b></span>
+        </span>
+      </span>
+      <span class="badge pink" data-glass-host>
+        <span class="sr-only">Hot</span>
+        <span class="fallback" aria-hidden="true" data-glass-fallback>
+          <span data-glass-marquee><i>Hot</i><b></b><i>Hot</i><b></b><i>Hot</i><b></b><i>Hot</i><b></b></span>
+        </span>
+      </span>
+    </div>
+
+    <span class="badge pin tr" data-glass-host>
+      <span class="sr-only">New</span>
+      <span class="fallback" aria-hidden="true" data-glass-fallback>
+        <span data-glass-marquee><i>New</i><b></b><i>New</i><b></b><i>New</i><b></b><i>New</i><b></b></span>
+      </span>
+    </span>
+  </div>
+
+  <p class="caption">متن از میان شیشه می‌گذرد؛ با بردن اشاره‌گر روی کارت تندتر می‌شود</p>
+</div>
+
+<script src="../liquid-glass.js"></script>
+<script>
+  LiquidGlass.injectStyles();
+
+  // GlassBadge (flow): a tinted drop, 0.4 loops per second, sped up while the parent is hovered.
+  document.querySelectorAll('.badge').forEach((host) => {
+    LiquidGlass.badgeFor(host, {
+      children: host.querySelector('.sr-only').textContent.trim(),
+      speed: 0.4,
+      tint: 0.82,
+    });
+  });
+</script>
+</body>
+</html>

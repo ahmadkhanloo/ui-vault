@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass — دکمهٔ اقدام (Merge)</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../glass.css">
+<style>
+  .stage { --ink:#16181a; --ink-soft:#4a5158; background: #eef0ee; direction: ltr; }
+
+  .cluster { position: absolute; inset: 0; display: grid; place-items: center; direction: ltr; }
+  .cluster .blob.a { width: 190px; height: 190px; transform: translate(-108px, -46px); background: #ff5a4d; }
+  .cluster .blob.b { width: 172px; height: 172px; transform: translate(110px, 40px); background: #2f6bff; }
+  .cluster .blob.c { width: 84px; height: 84px; transform: translate(6px, -92px); background: #22c9a4; }
+  .cluster .panel { width: 116px; height: 116px; transform: translate(84px, -64px); background: #ffd76e; border-radius: 30px; }
+
+  /* Letter by letter, from blur and the dark. The component's own CSS. */
+  @keyframes glass-letter { from { opacity: 0; filter: blur(10px) brightness(0); } }
+  [data-glass-letter] { animation: glass-letter .4s ease-out both; animation-delay: calc(var(--glass-c, 0) * .01s); }
+  @media (prefers-reduced-motion: reduce) { [data-glass-letter] { animation: none; } }
+
+  .scene { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+  /* ── GlassActionButton, size md, clear. h-10, pl-5, text-sm ── */
+  .action {
+    position: relative;
+    display: inline-flex; flex: none; align-items: center;
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 36px;           /* = sizes.md.merged */
+    font: 600 14px/1 var(--font);
+    border-radius: 999px;
+    white-space: nowrap; cursor: pointer; user-select: none; -webkit-user-select: none;
+    color: #16181a;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  .action[aria-disabled="true"] { cursor: default; }
+  [data-glass-tone="dark"] { color: #fff; }
+
+  /* The label's box is 16px larger than the text on every side and fades out over its
+     outer 8px, so a letter's blur has room and is never cut at a hard edge. */
+  .label {
+    position: relative;
+    margin: -16px; padding: 16px;
+    box-sizing: content-box;
+    display: inline-flex;
+    overflow: hidden;
+    transition: width .3s cubic-bezier(.2, .8, .2, 1);
+    scale: var(--glass-bend, 1);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8px, #000 calc(100% - 8px), transparent),
+                        linear-gradient(to bottom, transparent, #000 8px, #000 calc(100% - 8px), transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent, #000 8px, #000 calc(100% - 8px), transparent),
+                linear-gradient(to bottom, transparent, #000 8px, #000 calc(100% - 8px), transparent);
+    mask-composite: intersect;
+  }
+  .label .sizer { visibility: hidden; position: absolute; white-space: pre; }
+  .label > span:not(.sizer) { display: inline-flex; }
+
+  /* The spacer that springs closed once the droplet melts in. */
+  .spacer { flex: none; transition: width .3s cubic-bezier(.2, .8, .2, 1); }
+
+  /* Divider for the plain CSS look; hidden once the glass draws the droplet itself. */
+  .divider { position: absolute; top: 8px; bottom: 8px; width: 1px; right: 40px; background: currentColor; opacity: .2; }
+
+  /* The droplet: a returned glass body of its own (size-10). */
+  .drop {
+    position: absolute; top: 0; right: 0;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+    transition: translate .3s cubic-bezier(.2, .8, .2, 1);
+    scale: var(--glass-bend, 1);
+  }
+  .drop svg { width: 16px; height: 16px; flex: none; }
+  .drop .slot { display: flex; }
+  [data-glass-in] { animation: glass-in .38s cubic-bezier(.2, .8, .2, 1) both; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  .state {
+    font-size: 10.5px; color: var(--ink-soft); font-variant-numeric: tabular-nums; direction: ltr;
+    margin: 0; padding: 3px 9px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72); border: 1px solid rgba(22, 24, 26, 0.07);
+  }
+  .caption { inset: auto 0 10px 0; font-size: 10.5px; direction: rtl; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="cluster" aria-hidden="true">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+    <div class="blob c"></div>
+    <div class="panel"></div>
+  </div>
+
+  <div class="scene">
+    <button class="action" type="button" data-glass-host data-state="idle">
+      <!-- the glass canvas lands here (the runtime puts it first) -->
+
+      <span class="label" aria-hidden="true">
+        <span class="sizer">Deploying</span>
+        <span class="text">Deploy</span>
+      </span>
+
+      <span class="spacer" aria-hidden="true" style="width: 29px"></span>
+
+      <span class="divider" aria-hidden="true" data-glass-fallback></span>
+
+      <span class="drop" aria-hidden="true" data-glass-drop>
+        <span class="slot" data-glass-in>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h14"/><path d="m11 5 7 7-7 7"/></svg>
+        </span>
+      </span>
+
+      <span class="sr-only">Deploy</span>
+      <span class="sr-only" role="status"></span>
+    </button>
+    <p class="state">idle → deploying… → deployed ✓</p>
+  </div>
+
+  <p class="caption">قطرهٔ شیشه در بدنه ذوب می‌شود و تا پایان کار یکی می‌ماند</p>
+</div>
+
+<script src="../liquid-glass.js"></script>
+<script>
+  LiquidGlass.injectStyles();
+
+  const host = document.querySelector('.action');
+  const label = host.querySelector('.label');
+  const sizer = host.querySelector('.sizer');
+  const spacer = host.querySelector('.spacer');
+  const divider = host.querySelector('.divider');
+  const drop = host.querySelector('.drop');
+  const status = host.querySelector('[role="status"]');
+  const readout = document.querySelector('.state');
+
+  const SIZES = { apart: 65, merged: 36 };
+  const MERGED_SHIFT = 3;
+  const SUCCESS_WAIT = 0.6;   // seconds the glass stays swollen after the label is in
+  const RESET_AFTER = 6000;   // this demo splits the droplet off again, so it can be replayed
+
+  const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14"/><path d="m11 5 7 7-7 7"/></svg>';
+  const SPINNER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" data-glass-spin=""><path d="M21 12a9 9 0 1 1-6.22-8.56"/></svg>';
+  const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-glass-draw="" d="M4.5 12.75l6 6 9-13.5"/></svg>';
+
+  let state = 'idle';
+  let touched = false;
+  let runId = 0;
+  let currentText = host.querySelector('.text');
+
+  // Plain text changes letter by letter: each letter is its own element, in a queue.
+  function spell(labelText) {
+    const wrap = document.createElement('span');
+    Array.from(labelText).forEach((char, i) => {
+      const span = document.createElement('span');
+      if (touched) span.setAttribute('data-glass-letter', '');
+      span.style.setProperty('--glass-c', i);
+      span.textContent = char === ' ' ? '\u00a0' : char;
+      wrap.append(span);
+    });
+    return wrap;
+  }
+
+  const glass = LiquidGlass.layerFor(host, { material: 'clear', tint: 0.25, droplet: 'apart' });
+
+  function render(nextLabel) {
+    // The label's width springs to fit the new text (the sizer holds it, unclipped).
+    sizer.textContent = nextLabel;
+    const nextText = spell(nextLabel);
+    currentText.replaceWith(nextText);
+    currentText = nextText;
+    label.style.width = sizer.offsetWidth + 'px';
+
+    divider.style.display = state === 'idle' ? '' : 'none';
+    spacer.style.width = (state === 'idle' ? SIZES.apart - SIZES.merged : 0) + 'px';
+    drop.style.translate = state === 'idle' ? '' : `-${MERGED_SHIFT}px`;
+    // A fresh slot per state, so the swap's entrance animation plays each time.
+    const slot = document.createElement('span');
+    slot.className = 'slot';
+    slot.setAttribute('data-glass-in', '');
+    slot.innerHTML = state === 'pending' ? SPINNER : state === 'success' ? CHECK : ARROW;
+    drop.replaceChildren(slot);
+
+    status.textContent = state === 'pending' ? 'Deploying' : state === 'success' ? 'Deployed' : '';
+    readout.textContent =
+      state === 'idle' ? 'idle → deploying… → deployed ✓' : state === 'pending' ? 'doing the work…' : 'done — melts back in a moment';
+    host.dataset.state = state;
+    host.setAttribute('aria-busy', state === 'pending' ? 'true' : 'false');
+    if (state === 'idle') host.removeAttribute('aria-disabled');
+    else host.setAttribute('aria-disabled', 'true');
+  }
+
+  function setState(next) {
+    state = next;
+    glass.set({ droplet: next === 'idle' ? 'apart' : 'merged' });
+    render(next === 'pending' ? 'Deploying' : next === 'success' ? 'Deployed' : 'Deploy');
+    if (next === 'success') {
+      // The glass swells once, the label and the icon stretching with it (`--glass-bend`).
+      const spelled = 'Deployed';
+      const entrance = 0.4 + 0.01 * Math.max(0, Array.from(spelled).length - 1);
+      glass.set({ pulseHold: Math.max(entrance, 0.54) + SUCCESS_WAIT });
+      glass.pulse();
+    }
+  }
+
+  host.addEventListener('click', async () => {
+    if (state !== 'idle') return;
+    const id = ++runId;
+    touched = true;
+    setState('pending');
+    await new Promise((r) => setTimeout(r, 1400));   // the action's promise
+    if (id !== runId) return;
+    setState('success');
+    setTimeout(() => {
+      if (id === runId) setState('idle');
+    }, RESET_AFTER);
+  });
+
+  // First paint: the label sits at its own width.
+  label.style.width = sizer.offsetWidth + 'px';
+</script>
+</body>
+</html>

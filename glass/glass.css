@@ -1,0 +1,112 @@
+/* Liquid Glass — shared scaffold for the demos in this folder.
+ * Each demo owns its own scene (colours, shapes); this only sets the frame, the
+ * type and a few backdrop pieces the glass can bend. Flat colours only: the glass
+ * reads the page with a DOM walk, which cannot see gradients, masks or filters. */
+
+:root {
+  color-scheme: light dark;
+  --ink: #16181a;
+  --ink-soft: #5c636b;
+  --hair: rgba(0, 0, 0, 0.08);
+  --stage: #eef0ee;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--stage);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The scene: centred, with room around the glass for its shadow and swell. */
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  padding: 28px 20px;
+  overflow: hidden;
+}
+
+/* ---------- backdrop pieces the glass reflects and bends ---------- */
+
+/* A flat disc. Position it with inline styles or the .at-* helpers. */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* A soft square with a big radius — reads as a soft-cornered panel. */
+.panel {
+  position: absolute;
+  border-radius: 26px;
+  pointer-events: none;
+}
+
+/* A fine grid of hairlines, drawn as real elements (a DOM walk cannot see
+   pseudo-elements). `--line` sets the colour. */
+.hairgrid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  pointer-events: none;
+}
+
+.hairgrid .cell {
+  position: relative;
+  opacity: var(--o, 1);
+}
+
+.hairgrid .cell i {
+  position: absolute;
+  background: var(--line, rgba(0, 0, 0, 0.09));
+  display: block;
+}
+
+.hairgrid .cell i.h { inset: 0 0 auto 0; height: 1px; }
+.hairgrid .cell i.v { inset: 0 auto 0 0; width: 1px; }
+
+/* A caption under the glass: quiet, and never in the way. */
+.caption {
+  position: absolute;
+  inset: auto 0 10px 0;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  margin-inline: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(22, 24, 26, 0.06);
+  text-align: center;
+  font-size: 10.5px;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+
+/* ---------- shared glass host defaults ---------- */
+
+/* Every host of the glass needs these two: the layer is absolutely positioned
+   inside it, and a stacking context keeps the canvas behind the content. */
+[data-glass-host] {
+  position: relative;
+  isolation: isolate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

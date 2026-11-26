@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass — دکمهٔ شیشه‌ای (Press)</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../glass.css">
+<style>
+  /* Scene: flat colour only — the glass reads the page with a DOM walk. */
+  .stage { --ink:#16181a; --ink-soft:#5c636b; background: #eef0ee; }
+
+  /* The colour sits behind the glass, so its rim has something to bend and mirror. */
+  .cluster { position: absolute; inset: 0; display: grid; place-items: center; }
+  .cluster .blob.a { width: 148px; height: 148px; transform: translate(-104px, -36px); background: #ff5a4d; }
+  .cluster .blob.b { width: 132px; height: 132px; transform: translate(96px, 16px); background: #2f6bff; }
+  .cluster .blob.c { width: 76px; height: 76px; transform: translate(24px, -84px); background: #22c9a4; }
+  .cluster .panel { width: 118px; height: 118px; transform: translate(-14px, 78px); background: #ffd76e; border-radius: 32px; }
+
+  .hairgrid {
+    --line: rgba(22, 24, 26, 0.13);
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+  }
+
+  .scene {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px;
+  }
+
+  /* ── GlassButton, size xl, clear: the look before the glass draws ── */
+  .btn {
+    position: relative;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    height: 64px; padding: 0 30px;
+    font: 600 18px/1 var(--font);
+    border-radius: 999px;
+    color: #16181a;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    cursor: pointer; user-select: none; -webkit-user-select: none;
+    white-space: nowrap;
+  }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  /* Once the glass draws, it picks a readable tone for the label. */
+  [data-glass-tone="dark"] { color: #fff; }
+
+  /* ── tinted glass: it takes this very colour ── */
+  .btn.tinted {
+    height: 46px; padding: 0 22px; font-size: 14px;
+    background: #2f6bff; color: #fff;
+    border-color: transparent; box-shadow: none;
+  }
+  .btn.tinted svg { width: 16px; height: 16px; }
+
+  .caption { inset: auto 0 10px 0; font-size: 10.5px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="cluster" aria-hidden="true">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+    <div class="blob c"></div>
+    <div class="panel"></div>
+  </div>
+  <div class="hairgrid" id="grid" aria-hidden="true"></div>
+
+  <div class="scene">
+    <button class="btn" type="button" data-glass-host>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+      Get started
+    </button>
+    <button class="btn tinted" type="button" data-glass-host>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+      Save
+    </button>
+  </div>
+
+  <p class="caption">اشاره‌گر را روی شیشه بکشید؛ نگه دارید و دور کنید</p>
+</div>
+
+<script src="../liquid-glass.js"></script>
+<script>
+  // The hair grid: real elements, fainter away from the middle.
+  (function buildGrid() {
+    const COLS = 12, ROWS = 8;
+    const grid = document.getElementById('grid');
+    const fade = (col, row) => {
+      const d = Math.hypot((col - (COLS - 1) / 2) / (COLS / 2), (row - (ROWS - 1) / 2) / (ROWS / 2));
+      return Math.min(1, Math.max(0, (1 - d) / 0.55));
+    };
+    for (let i = 0; i < COLS * ROWS; i++) {
+      const cell = document.createElement('span');
+      cell.className = 'cell';
+      cell.style.setProperty('--o', fade(i % COLS, Math.floor(i / COLS)).toFixed(3));
+      const h = document.createElement('i'); h.className = 'h';
+      const v = document.createElement('i'); v.className = 'v';
+      cell.append(h, v);
+      grid.append(cell);
+    }
+  })();
+
+  LiquidGlass.injectStyles();
+
+  // GlassButton (press): clear glass with a light tint, and tinted glass on its own colour.
+  document.querySelectorAll('.btn').forEach((host) => {
+    const tinted = host.classList.contains('tinted');
+    LiquidGlass.layerFor(host, { material: tinted ? 'tinted' : 'clear', tint: tinted ? 0.85 : 0.32 });
+  });
+</script>
+</body>
+</html>

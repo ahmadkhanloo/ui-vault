@@ -2,13 +2,13 @@
 
 # ui-vault — the UI Vault
 
-A personal, function-organized reference vault of **50 live, animated UI components** — percent gauges and finance charts, toggles, buttons, cards, navigation, inputs, interactions, and a full animated product showcase — so whatever you need, you find it next to things that do the same job.
+A personal, function-organized reference vault of **72 live, animated UI components** — percent gauges and finance charts, toggles, buttons, cards, navigation, inputs, interactions, liquid glass, typography animations, ambient backgrounds, transitions, and a full animated product showcase — so whatever you need, you find it next to things that do the same job.
 
 ## What is this?
 
 Instead of scattered screenshots, every interesting component found on the web is preserved here **with runnable code**. Each item ships with:
 
-- **The original code** — verbatim from its source (`snippet.html` for Quix, self-contained d3motion files, the full Cake Couch app)
+- **The original code** — verbatim from its source (`snippet.html` for Quix, self-contained d3motion files, the full Cake Couch app, Animation Handbook techniques, VibePrompt blueprints)
 - **A live preview** — a standalone HTML file that plays the real animation in your browser
 - **A live screenshot** — captured from that very render, so you can find things at a glance in this README
 - **A per-item README** (Persian) — description, files, usage and tunable attributes
@@ -23,10 +23,17 @@ For easy browsing, the **live gallery** (`index.html`) shows all items on one pa
 | [Indicators & Gauges](#indicators) | 17 | Quix percent gauges and progress bars (a single <lp-loader> element) next to d3motion status indicators. |
 | [Toggles & Switches](#toggles) | 3 | The VibeHub day/night switch (React source + build-free demo) and d3motion switches. |
 | [Buttons](#buttons) | 2 | — |
-| [Cards](#cards) | 3 | — |
+| [Liquid Glass](#glass) | 5 | The MIT `liquid-glass` kit: every control is a real WebGL2 lens — button, card, badge, button group and a gooey merge action button. |
+| [Cards](#cards) | 6 | Music player, weather clock, notification stack, plus VibePrompt auth card, bento tile, and SaaS pricing tier. |
 | [Inputs](#inputs) | 3 | — |
 | [Navigation](#navigation) | 4 | — |
-| [Interactions](#interactions) | 4 | — |
+| [Interactions](#interactions) | 5 | Task checklist, file upload, chat stream, kanban board, and multi-step onboarding wizard. |
+| [Product Showcase](#showcase) | 1 | Animated product showcase Cake Couch with hand-drawn SVG art. |
+| [Typography](#text) | 3 | Typewriter reveal, gradient shimmer, and staggered character wave. |
+| [Ambient Backgrounds](#backgrounds) | 3 | Particle constellations, synthwave grid, and dynamic wave grid. |
+| [Transitions](#transitions) | 3 | Staggered entrance, flip card switch, and elastic scale morph. |
+| [Scroll Motion](#scroll) | 2 | Parallax layers and viewport scroll reveals. |
+| [Feedback](#feedback) | 2 | Shimmer skeleton loader and animated toast notification. |
 
 ## Live gallery
 
@@ -48,6 +55,7 @@ ui-vault/
 ├─ indicators/          ← Indicators & Gauges (17)
 ├─ toggles/             ← Toggles & Switches (3)
 ├─ buttons/             ← Buttons (2)
+├─ glass/               ← Liquid Glass (5) + the verbatim kit and its shared runtime
 ├─ cards/               ← Cards (3)
 ├─ inputs/              ← Inputs (3)
 ├─ navigation/          ← Navigation (4)
@@ -102,6 +110,15 @@ The VibeHub day/night switch (React source + build-free demo) and d3motion switc
 | --- | --- | --- |
 | [![deploy-button](buttons/deploy-button/card.png)](buttons/deploy-button/) <br>Morphing Deploy Button <br>`d3motion` | [![social-heart-like](buttons/social-heart-like/card.png)](buttons/social-heart-like/) <br>Social Heart Like Button <br>`d3motion` |
 
+## Liquid Glass — `glass`
+
+The [Liquid Glass](https://github.com/bilalgursen/liquid-glass) kit (MIT): every control is a real lens that bends the page behind it, drawn by one dependency-free WebGL2 renderer. The source is kept verbatim in [glass/src/](glass/src/); the demos are build-free pages in the same folder. Details: [glass README](glass/README.md) (Persian)
+
+|   |   |   |
+| --- | --- | --- |
+| [![press-button](glass/press-button/card.png)](glass/press-button/) <br>Glass Button — Press <br>`Liquid Glass` | [![merge-action-button](glass/merge-action-button/card.png)](glass/merge-action-button/) <br>Merge Action Button <br>`Liquid Glass` | [![hold-card](glass/hold-card/card.png)](glass/hold-card/) <br>Glass Card — Hold <br>`Liquid Glass` |
+| [![share-button-group](glass/share-button-group/card.png)](glass/share-button-group/) <br>Button Group — Share <br>`Liquid Glass` | [![flow-badge](glass/flow-badge/card.png)](glass/flow-badge/) <br>Glass Badge — Flow <br>`Liquid Glass` |
+
 ## Cards — `cards`
 
 |   |   |   |
@@ -148,7 +165,8 @@ The VibeHub day/night switch (React source + build-free demo) and d3motion switc
 | [Quix Studio — Free Components](https://quixstudio.net/free/components) | 24 | Free for personal and commercial use (per the site) |
 | VibeHub | 1 | My own code |
 | [HamzehGhoreyshi/cake-couch-animation](https://github.com/HamzehGhoreyshi/cake-couch-animation) | 1 | Upstream repo has no license — personal reference only |
+| [bilalgursen/liquid-glass](https://github.com/bilalgursen/liquid-glass) | 5 | **MIT** — free to use, change and redistribute |
 
 Per-item details (path, collection date, rights, dimensions) live in [SOURCES.md](SOURCES.md) (Persian).
 
-> **Important:** most of this collection (d3motion and cake-couch) has no explicit redistribution permission, so **this repo must stay private** — it exists purely as a personal reference and source of inspiration.
+> **Important:** most of this collection (d3motion and cake-couch) has no explicit redistribution permission, so **this repo must stay private** — it exists purely as a personal reference and source of inspiration. The exceptions are the Quix components (free per the site) and the `glass/` kit, which is MIT: copy it into your own projects freely.

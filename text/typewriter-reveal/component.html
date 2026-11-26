@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Kinetic Typewriter Reveal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  color-scheme: dark;
+  --bg:#0F0F12;--tray:#18181C;--accent:#2F5BFF;--fg:#F5F5F7;--mut:#8E8E93;
+}
+body{
+  width:100%;height:100vh;overflow:hidden;background:transparent!important;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fira Code',monospace;color:var(--fg);
+}
+.box{
+  width:260px;padding:24px 20px;background:var(--tray);
+  border-radius:18px;border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 8px 30px rgba(0,0,0,0.4);
+}
+.tag{
+  font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);
+  margin-bottom:12px;font-family:Inter,sans-serif;font-weight:600;display:flex;align-items:center;gap:6px;
+}
+.tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.line{
+  font-size:13px;line-height:1.6;min-height:44px;color:#A9C1FF;
+}
+.cursor{
+  display:inline-block;width:2px;height:14px;background:#60A5FA;
+  vertical-align:middle;margin-left:2px;animation:blink 0.8s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="tag">System Prompt</div>
+  <div class="line"><span id="txt"></span><span class="cursor"></span></div>
+</div>
+<script>
+const words = ["Crafting seamless motion...", "Transforming UI interactions...", "176 pure web animations.", "Zero dependencies required."];
+let wIdx = 0, charIdx = 0, isDeleting = false;
+const el = document.getElementById('txt');
+
+function type(){
+  const cur = words[wIdx];
+  if(isDeleting){
+    charIdx--;
+    el.textContent = cur.substring(0, charIdx);
+    if(charIdx === 0){
+      isDeleting = false;
+      wIdx = (wIdx + 1) % words.length;
+      setTimeout(type, 400);
+      return;
+    }
+    setTimeout(type, 35);
+  } else {
+    charIdx++;
+    el.textContent = cur.substring(0, charIdx);
+    if(charIdx === cur.length){
+      isDeleting = true;
+      setTimeout(type, 1800);
+      return;
+    }
+    setTimeout(type, 65);
+  }
+}
+type();
+</script>
+</body>
+</html>

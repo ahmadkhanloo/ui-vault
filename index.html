@@ -116,6 +116,7 @@ figure.card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
 .preview.h-charts{height:220px}
 .preview.h-ind{height:210px}
 .preview.h-tog{height:300px}
+.preview.h-glass{height:300px}
 .preview.h-show{height:320px}
 .preview iframe{
   width:100%;height:100%;border:0;display:block;background:transparent;
@@ -174,7 +175,7 @@ footer{
 
 <footer>
   <div class="foot-inner">
-    مرجع شخصی؛ وضعیت حقوق هر منبع در <a href="SOURCES.md">SOURCES.md</a> — d3motion و cake-couch باید خصوصی بمانند · کامپوننت‌های Quix طبق اعلام سایت برای استفادهٔ شخصی و تجاری آزادند.
+    مرجع شخصی؛ وضعیت حقوق هر منبع در <a href="SOURCES.md">SOURCES.md</a> — d3motion و cake-couch باید خصوصی بمانند · کامپوننت‌های Quix طبق اعلام سایت برای استفادهٔ شخصی و تجاری آزادند · کیت <bdi dir="ltr">Liquid Glass</bdi> با لایسنس MIT آزاد است.
     <br>کارت Cake Couch برای اجرای <bdi dir="ltr">art.svg</bdi> به سرور محلی نیاز دارد: <bdi dir="ltr">python -m http.server 4173</bdi>
   </div>
 </footer>
@@ -224,10 +225,20 @@ const CATALOG = [
     {slug:"deploy-button", name:"دکمهٔ دیپلوی مورف‌شونده", src:"d3motion", file:"component.html"},
     {slug:"social-heart-like", name:"دکمهٔ لایک قلب", src:"d3motion", file:"component.html"},
   ]},
+  {cat:"glass", fa:"شیشهٔ مایع", latin:"liquid glass", h:"h-glass", items:[
+    {slug:"press-button", name:"دکمهٔ شیشه‌ای — Press", src:"Liquid Glass", file:"demo.html"},
+    {slug:"merge-action-button", name:"دکمهٔ اقدام ذوب‌شونده — Merge", src:"Liquid Glass", file:"demo.html"},
+    {slug:"hold-card", name:"کارت شیشه‌ای — Hold", src:"Liquid Glass", file:"demo.html"},
+    {slug:"share-button-group", name:"گروه دکمه — Share", src:"Liquid Glass", file:"demo.html"},
+    {slug:"flow-badge", name:"نشان شیشه‌ای — Flow", src:"Liquid Glass", file:"demo.html"},
+  ]},
   {cat:"cards", fa:"کارت‌ها", latin:"cards", h:"", items:[
     {slug:"music-player", name:"پلیر موسیقی Now Playing", src:"d3motion", file:"component.html"},
     {slug:"weather-clock", name:"ساعت جهانی و آب‌وهوا", src:"d3motion", file:"component.html"},
     {slug:"notification-stack", name:"مرکز اعلان انباشته", src:"d3motion", file:"component.html"},
+    {slug:"auth-card", name:"کارت لاگین شیشه‌ای مدرن", src:"VibePrompt", file:"component.html"},
+    {slug:"bento-tile", name:"تایل بنتو هوشمند و انیمیشنی", src:"VibePrompt", file:"component.html"},
+    {slug:"pricing-tier", name:"کارت قیمت‌گذاری حرفه‌ای SaaS", src:"VibePrompt", file:"component.html"},
   ]},
   {cat:"inputs", fa:"ورودی‌ها", latin:"inputs", h:"", items:[
     {slug:"otp-verification", name:"تأیید کد ۶ رقمی OTP", src:"d3motion", file:"component.html"},
@@ -245,9 +256,33 @@ const CATALOG = [
     {slug:"file-upload", name:"پیشرفت آپلود فایل", src:"d3motion", file:"component.html"},
     {slug:"chat-stream", name:"جریان چت زنده", src:"d3motion", file:"component.html"},
     {slug:"kanban-board", name:"برد کانبان اسپرینت", src:"d3motion", file:"component.html"},
+    {slug:"onboarding-step", name:"ویزارد خوش‌آمدگویی چندمرحله‌ای", src:"VibePrompt", file:"component.html"},
   ]},
   {cat:"showcase", fa:"ویترین محصول", latin:"showcase", h:"h-show", items:[
     {slug:"cake-couch", name:"Cake Couch — نمایش محصول انیمیشنی", src:"GitHub", file:"index.html", note:"برای بارگذاری art.svg به سرور محلی نیاز دارد"},
+  ]},
+  {cat:"text", fa:"انیمیشن‌های متن", latin:"typography", h:"", items:[
+    {slug:"typewriter-reveal", name:"تایپ ماشین‌نویسی پویا", src:"Handbook", file:"component.html"},
+    {slug:"gradient-shimmer", name:"درخشش گرادیانی متن", src:"Handbook", file:"component.html"},
+    {slug:"staggered-wave", name:"موج متحرک حروف", src:"Handbook", file:"component.html"},
+  ]},
+  {cat:"backgrounds", fa:"افکت‌های پس‌زمینه", latin:"backgrounds", h:"", items:[
+    {slug:"particle-constellation", name:"صورت فلکی ذرات تعاملی", src:"Handbook", file:"component.html"},
+    {slug:"synthwave-grid", name:"افق شبکهٔ سینت‌ویو Retro", src:"Handbook", file:"component.html"},
+    {slug:"dynamic-grid", name:"شبکهٔ نقطه‌ای نوسانی", src:"Handbook", file:"component.html"},
+  ]},
+  {cat:"transitions", fa:"ترانزیشن و ورود", latin:"transitions", h:"", items:[
+    {slug:"staggered-entrance", name:"ورود متوالی لیست", src:"Handbook", file:"component.html"},
+    {slug:"flip-card-switch", name:"چرخش ۳بعدی تغییر نما", src:"Handbook", file:"component.html"},
+    {slug:"elastic-scale", name:"تغییر شکل الاستیک مورفینگ", src:"Handbook", file:"component.html"},
+  ]},
+  {cat:"scroll", fa:"انیمیشن‌های اسکرول", latin:"scroll motion", h:"", items:[
+    {slug:"parallax-layers", name:"لایه‌های پارالاکس چندعمقی", src:"Handbook", file:"component.html"},
+    {slug:"scroll-reveal", name:"آشکارسازی پیوسته ویوپورت", src:"Handbook", file:"component.html"},
+  ]},
+  {cat:"feedback", fa:"بازخورد و وضعیت", latin:"feedback", h:"", items:[
+    {slug:"skeleton-loader", name:"اسکلتون لودر درخشان", src:"Handbook", file:"component.html"},
+    {slug:"toast-notification", name:"توئست اعلان شناور", src:"Handbook", file:"component.html"},
   ]},
 ];
 

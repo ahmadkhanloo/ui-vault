@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass — گروه دکمه (Share)</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../glass.css">
+<style>
+  .stage { --ink:#16181a; --ink-soft:#4a5158; background: #eef0ee; direction: ltr; }
+
+  .cluster { position: absolute; inset: 0; display: grid; place-items: center; direction: ltr; }
+  .cluster .blob.a { width: 196px; height: 196px; transform: translate(-108px, -30px); background: #ff5a4d; }
+  .cluster .blob.b { width: 176px; height: 176px; transform: translate(106px, 22px); background: #2f6bff; }
+  .cluster .blob.c { width: 88px; height: 88px; transform: translate(-6px, -94px); background: #22c9a4; }
+  .cluster .panel { width: 124px; height: 124px; transform: translate(66px, 74px); background: #ffd76e; border-radius: 32px; }
+
+  .scene { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+  /* ── GlassButtonGroup: size md, p-1, rounded-full, font-semibold ── */
+  .group {
+    position: relative;
+    display: inline-flex; flex: none; align-items: center;
+    padding: 4px;
+    border-radius: 999px;
+    font-weight: 600; white-space: nowrap; user-select: none; -webkit-user-select: none;
+  }
+  /* tinted (default): white, or the colour of a bg-* class of your own */
+  .group.tinted { background: #ffffff; color: #171717; }
+  /* clear: bends the page behind it; the label follows the glass's own tone */
+  .group.clear {
+    background: rgba(255, 255, 255, 0.55); color: #16181a;
+    border: 1px solid rgba(0, 0, 0, 0.10); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  [data-glass-tone="dark"] { color: #fff; }
+
+  /* glass sizes its shadow by its height; a stacked body is several items tall */
+  .group.vertical { flex-direction: column; align-items: stretch; border-radius: 20px; }
+
+  /* ── GlassButtonGroupItem: h-8 min-w-8 gap-2 px-3.5 text-sm ── */
+  .item {
+    display: inline-flex; flex: none; align-items: center; justify-content: center;
+    height: 32px; min-width: 32px; gap: 8px; padding: 0 14px;
+    font: 600 14px/1 var(--font);
+    color: inherit; background: none; border: 0;
+    border-radius: 999px; cursor: pointer;
+  }
+  .item svg { width: 16px; height: 16px; flex: none; }
+  .item.icon { padding: 0; }
+
+  /* ── GlassButtonGroupSeparator: mx-0.5 h-1/2 w-px bg-current opacity-20 ── */
+  .sep { flex: none; width: 1px; height: 50%; margin: 0 2px; background: currentColor; opacity: .2; }
+
+  .caption { inset: auto 0 10px 0; font-size: 10.5px; direction: rtl; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="cluster" aria-hidden="true">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+    <div class="blob c"></div>
+    <div class="panel"></div>
+  </div>
+
+  <div class="scene">
+    <!-- tinted glass (the default): one white body, the whole body swells under the pointer -->
+    <div class="group tinted" role="group" aria-label="Message" data-glass-host>
+      <button class="item" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
+        Archive
+      </button>
+      <button class="item" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+        Report
+      </button>
+      <span class="sep" role="separator" aria-orientation="vertical"></span>
+      <button class="item icon" type="button" aria-label="More">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+      </button>
+    </div>
+
+    <!-- clear glass: it bends what lies behind it -->
+    <div class="group clear" role="group" aria-label="Share" data-glass-host>
+      <button class="item icon" type="button" aria-label="Like">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+      </button>
+      <span class="sep" role="separator" aria-orientation="vertical"></span>
+      <button class="item icon" type="button" aria-label="Share">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg>
+      </button>
+      <span class="sep" role="separator" aria-orientation="vertical"></span>
+      <button class="item icon" type="button" aria-label="Save">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <p class="caption">یک بدنهٔ شیشه برای چند کنش؛ کل بدنه با اشاره‌گر متورم می‌شود</p>
+</div>
+
+<script src="../liquid-glass.js"></script>
+<script>
+  LiquidGlass.injectStyles();
+
+  // GlassButtonGroup (share): the items carry no glass of their own — the group is one body.
+  document.querySelectorAll('.group').forEach((host) => {
+    const clear = host.classList.contains('clear');
+    LiquidGlass.layerFor(host, {
+      material: clear ? 'clear' : 'tinted',
+      tint: clear ? 0.3 : 0.85,
+      swell: true,
+    });
+  });
+</script>
+</body>
+</html>
