@@ -39,7 +39,7 @@ body{
 }
 a{color:inherit;text-decoration:none}
 
-/* ---------- هدر شیشه‌ای مدرن ---------- */
+/* ---------- هدر چسبان هوشمند ---------- */
 header{
   position:sticky;top:0;z-index:50;
   background:rgba(9,10,13,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
@@ -47,100 +47,105 @@ header{
 }
 .head-inner{
   max-width:var(--maxw);margin:0 auto;
-  padding:16px 24px 10px;display:flex;flex-direction:column;gap:14px;
+  padding:14px 24px 10px;display:flex;flex-direction:column;gap:12px;
 }
 .top-bar{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
-.brand{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}
 .logo-icon{
-  width:32px;height:32px;border-radius:10px;
+  width:30px;height:30px;border-radius:9px;
   background:linear-gradient(135deg, #38BDF8, #818CF8);
   display:flex;align-items:center;justify-content:center;
-  color:#090A0D;font-weight:800;font-size:15px;box-shadow:0 0 20px rgba(56,189,248,0.4);
+  color:#090A0D;font-weight:800;font-size:14px;box-shadow:0 0 16px rgba(56,189,248,0.35);
 }
+.title-group{display:flex;align-items:baseline;gap:8px}
 h1{
-  font-size:20px;font-weight:800;letter-spacing:-0.4px;
+  font-size:18px;font-weight:800;letter-spacing:-0.3px;
   display:flex;align-items:center;gap:8px;
 }
-h1 .count{
-  font-family:var(--font-mono);font-size:12px;font-weight:600;
-  color:var(--accent);background:rgba(56,189,248,0.12);
-  padding:2px 8px;border-radius:20px;border:1px solid rgba(56,189,248,0.25);
+.current-group-badge{
+  font-size:12px;font-weight:600;color:var(--accent);
+  background:rgba(56,189,248,0.1);padding:2px 10px;border-radius:20px;
+  border:1px solid rgba(56,189,248,0.2);display:inline-block;transition:all 0.2s;
 }
-.ext-links{display:flex;align-items:center;gap:12px}
-.github-link{
-  display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);
-  padding:6px 12px;border-radius:8px;border:1px solid var(--border);
-  transition:all 0.2s;background:var(--surface);
+.header-actions{display:flex;align-items:center;gap:8px}
+.view-mode-btn{
+  display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;
+  color:var(--muted);background:var(--surface);padding:6px 12px;
+  border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;
 }
-.github-link:hover{color:#FFF;border-color:var(--border-strong);background:var(--surface-2)}
+.view-mode-btn:hover{color:#FFF;background:var(--surface-2);border-color:var(--border-strong)}
+.view-mode-btn.active{color:var(--accent);border-color:var(--accent);background:rgba(56,189,248,0.08)}
 
 /* ابزارهای سرچ و فیلتر */
 .tools{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
 }
 .search-box{
-  position:relative;display:flex;align-items:center;flex:1 1 260px;max-width:380px;
+  position:relative;display:flex;align-items:center;flex:1 1 240px;max-width:340px;
 }
 .search-icon{
   position:absolute;right:12px;color:var(--faint);pointer-events:none;
 }
 .search-input{
   width:100%;background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:9px 36px 9px 48px;
-  font-family:var(--font-body);font-size:13px;color:var(--fg);
+  border-radius:10px;padding:8px 34px 8px 46px;
+  font-family:var(--font-body);font-size:12.5px;color:var(--fg);
   outline:none;transition:all 0.2s;
 }
 .search-input:focus{
   border-color:var(--accent);background:var(--surface-2);
-  box-shadow:0 0 16px var(--accent-glow);
+  box-shadow:0 0 14px var(--accent-glow);
 }
 .kbd-shortcut{
-  position:absolute;left:10px;font-family:var(--font-mono);font-size:10px;
+  position:absolute;left:8px;font-family:var(--font-mono);font-size:9.5px;
   color:var(--faint);background:rgba(255,255,255,0.06);
-  padding:2px 6px;border-radius:6px;border:1px solid var(--border);
+  padding:2px 5px;border-radius:4px;border:1px solid var(--border);
 }
 .pills-scroll{
-  display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:6px;
+  display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:4px;
   scrollbar-width:none;-ms-overflow-style:none;flex:1 1 100%;
 }
 .pills-scroll::-webkit-scrollbar{display:none}
 .pill{
   flex-shrink:0;cursor:pointer;font-size:12px;font-weight:500;
   color:var(--muted);background:var(--surface);
-  border:1px solid var(--border);border-radius:20px;
-  padding:5px 12px;transition:all 0.2s;display:flex;align-items:center;gap:6px;
+  border:1px solid var(--border);border-radius:16px;
+  padding:4px 11px;transition:all 0.2s;display:flex;align-items:center;gap:6px;
 }
 .pill:hover{color:#FFF;border-color:var(--border-strong);background:var(--surface-2)}
 .pill.active{
   background:var(--accent);color:#090A0D;border-color:var(--accent);
-  font-weight:700;box-shadow:0 0 14px var(--accent-glow);
+  font-weight:700;box-shadow:0 0 12px var(--accent-glow);
 }
-.pill .badge{
-  font-family:var(--font-mono);font-size:10px;opacity:0.8;
-}
+.pill .badge{font-family:var(--font-mono);font-size:9.5px;opacity:0.85}
 
 /* ---------- محتوای اصلی ---------- */
-main{max-width:var(--maxw);margin:0 auto;padding:24px 24px 80px;width:100%}
+main{max-width:var(--maxw);margin:0 auto;padding:20px 24px 80px;width:100%}
 section{padding-block:16px 8px;scroll-margin-top:140px}
 .sec-head{
-  display:flex;align-items:baseline;gap:12px;
-  border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:18px;
 }
-.sec-head h2{font-size:18px;font-weight:700;letter-spacing:-0.2px}
+.sec-title-wrap{display:flex;align-items:baseline;gap:10px}
+.sec-head h2{font-size:17px;font-weight:700}
 .sec-head .latin{
   direction:ltr;font-family:var(--font-mono);font-size:11px;
   color:var(--faint);text-transform:uppercase;letter-spacing:1px;
 }
-.sec-head .c{
-  font-family:var(--font-mono);font-size:11px;color:var(--muted);
-  margin-inline-start:auto;background:var(--surface-2);padding:2px 8px;border-radius:12px;
+.expand-toggle{
+  background:none;border:none;color:var(--muted);font-family:var(--font-body);
+  font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:all 0.2s;padding:4px 8px;border-radius:6px;
 }
+.expand-toggle:hover{color:var(--accent);background:var(--surface-2)}
+.expand-toggle svg{transition:transform 0.2s}
+.expanded .expand-toggle svg{transform:rotate(180deg)}
 
 /* شبکه کارت‌ها */
 .grid{
-  display:grid;gap:18px;
+  display:grid;gap:16px;
   grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
 }
 figure.card{
@@ -152,6 +157,9 @@ figure.card:hover{
   border-color:var(--border-strong);transform:translateY(-3px);
   box-shadow:0 12px 30px rgba(0,0,0,0.5);
 }
+figure.card.is-secondary{display:none}
+.expanded figure.card.is-secondary{display:flex}
+
 .preview{
   position:relative;height:230px;
   display:flex;align-items:center;justify-content:center;
@@ -167,10 +175,18 @@ figure.card:hover{
   width:100%;height:100%;border:0;display:block;background:transparent;
 }
 
-/* پاورقی و دکمه‌های کارت */
+/* کارت شاخص با نشانگر برجسته */
+.featured-badge{
+  position:absolute;top:10px;right:10px;background:rgba(56,189,248,0.15);
+  border:1px solid rgba(56,189,248,0.35);color:var(--accent);
+  padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600;
+  backdrop-filter:blur(8px);pointer-events:none;z-index:2;
+}
+
+/* پاورقی کارت */
 .card-footer{
   display:flex;align-items:center;justify-content:space-between;
-  padding:12px 14px;background:var(--surface);gap:8px;
+  padding:10px 14px;background:var(--surface);gap:8px;
 }
 .card-info{display:flex;flex-direction:column;min-width:0;flex:1}
 .card-info .fa{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -179,39 +195,29 @@ figure.card:hover{
   color:var(--faint);margin-top:1px;
 }
 .card-actions{display:flex;align-items:center;gap:6px}
-.src-tag{
-  font-size:10px;font-family:var(--font-mono);padding:2px 8px;border-radius:6px;
-  border:1px solid var(--border);background:var(--surface-2);color:var(--muted);
-}
-.src-tag.tag-Quix{color:#38BDF8;border-color:rgba(56,189,248,0.2)}
-.src-tag.tag-d3motion{color:#818CF8;border-color:rgba(129,140,248,0.2)}
-.src-tag.tag-LiquidGlass{color:#34D399;border-color:rgba(52,211,153,0.2)}
-.src-tag.tag-Handbook{color:#F472B6;border-color:rgba(244,114,182,0.2)}
-.src-tag.tag-VibePrompt{color:#FBBF24;border-color:rgba(251,191,36,0.2)}
 
 .btn-icon{
-  width:28px;height:28px;border-radius:8px;background:var(--surface-2);
+  width:26px;height:26px;border-radius:7px;background:var(--surface-2);
   border:1px solid var(--border);color:var(--muted);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   transition:all 0.2s;text-decoration:none;
 }
 .btn-icon:hover{color:#FFF;background:var(--surface-hover);border-color:var(--border-strong)}
 
-/* فوتر */
+/* فوتر خلوت */
 footer{
   margin-top:auto;border-top:1px solid var(--border);
   background:var(--surface);color:var(--faint);font-size:12px;
 }
 .foot-inner{
-  max-width:var(--maxw);margin:0 auto;padding:24px;
-  display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
+  max-width:var(--maxw);margin:0 auto;padding:18px 24px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-.foot-inner a{color:var(--muted);text-decoration:underline}
 .no-result{
   display:none;color:var(--muted);padding:60px 0;text-align:center;font-size:15px;
 }
 
-/* توئست کپی */
+/* توئست */
 .copy-toast{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);
   background:#10B981;color:#FFF;padding:8px 16px;border-radius:20px;
@@ -228,24 +234,22 @@ footer{
     <div class="top-bar">
       <div class="brand">
         <div class="logo-icon">UI</div>
-        <div>
-          <h1>گنجینهٔ UI <span class="count" id="total"></span></h1>
+        <div class="title-group">
+          <h1>گنجینهٔ UI</h1>
+          <span class="current-group-badge" id="currentGroup">تمام گروه‌ها</span>
         </div>
       </div>
-      <div class="ext-links">
-        <a class="github-link" href="SOURCES.md">
-          <span>منابع و حقوق</span>
-        </a>
-        <a class="github-link" href="https://github.com/ahmadkhanloo/ui-vault" target="_blank" rel="noreferrer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>GitHub</span>
-        </a>
+      <div class="header-actions">
+        <button class="view-mode-btn" id="toggleViewBtn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span id="viewModeText">نمایش همه</span>
+        </button>
       </div>
     </div>
 
     <div class="tools">
       <div class="search-box">
-        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <input id="q" type="search" class="search-input" placeholder="جستجو در میان کامپوننت‌ها..." aria-label="جستجو">
         <span class="kbd-shortcut">⌘K</span>
       </div>
@@ -263,114 +267,105 @@ footer{
 
 <footer>
   <div class="foot-inner">
-    <span>گنجینهٔ مرجع کامپوننت‌های زنده و انیمیشن‌دار رابط کاربری</span>
-    <span>جزئیات لایسنس و حقوق هر منبع در <a href="SOURCES.md">SOURCES.md</a></span>
+    <span>گنجینهٔ شخصی کامپوننت‌ها و انیمیشن‌های وب</span>
+    <span id="summaryCount"></span>
   </div>
 </footer>
 
 <script>
+// پالایش کارکردی کاتالوگ: حذف موارد موازی که کارکرد یکسان دارند
 const CATALOG = [
   {cat:"charts", fa:"نمودارها", latin:"charts", h:"h-charts", items:[
-    {slug:"candlestick", name:"کندل‌استیک BTC/USD", src:"Quix", file:"component.html"},
-    {slug:"portfolio-donut", name:"دونات سبد سرمایه", src:"Quix", file:"component.html"},
-    {slug:"fear-greed", name:"شاخص ترس و طمع", src:"Quix", file:"component.html"},
-    {slug:"credit-score", name:"امتیاز اعتباری", src:"Quix", file:"component.html"},
-    {slug:"yield-curve", name:"منحنی بازده", src:"Quix", file:"component.html"},
-    {slug:"activity-heatmap", name:"هیت‌مپ فعالیت", src:"Quix", file:"component.html"},
-    {slug:"market-depth", name:"عمق بازار", src:"Quix", file:"component.html"},
-    {slug:"gas-tracker", name:"ردیاب کارمزد گس", src:"Quix", file:"component.html"},
-    {slug:"budget-bars", name:"میله‌های بودجه", src:"Quix", file:"component.html"},
-    {slug:"gradient-line", name:"خط گرادیانی", src:"Quix", file:"component.html"},
-    {slug:"savings-ring", name:"حلقهٔ پس‌انداز", src:"Quix", file:"component.html"},
-    {slug:"dominance-rings", name:"حلقه‌های سلطهٔ بازار", src:"Quix", file:"component.html"},
-    {slug:"stock-portfolio", name:"اسپارک‌لاین پرتفوی مالی", src:"d3motion", file:"component.html"},
+    {slug:"candlestick", name:"کندل‌استیک BTC/USD", file:"component.html"},
+    {slug:"portfolio-donut", name:"دونات سبد سرمایه", file:"component.html"},
+    {slug:"fear-greed", name:"شاخص ترس و طمع", file:"component.html"},
+    {slug:"credit-score", name:"امتیاز اعتباری", file:"component.html"},
+    {slug:"yield-curve", name:"منحنی بازده", file:"component.html"},
+    {slug:"activity-heatmap", name:"هیت‌مپ فعالیت", file:"component.html"},
+    {slug:"market-depth", name:"عمق بازار", file:"component.html"},
+    {slug:"gradient-line", name:"خط گرادیانی", file:"component.html"},
+    {slug:"dominance-rings", name:"حلقه‌های سلطهٔ بازار", file:"component.html"},
+    {slug:"stock-portfolio", name:"اسپارک‌لاین پرتفوی مالی", file:"component.html"},
   ]},
   {cat:"indicators", fa:"نشانگرها و گیج‌ها", latin:"indicators", h:"h-ind", items:[
-    {slug:"multi-arc-percent", name:"گیج درصدی سه‌قوسی", src:"Quix", file:"component.html"},
-    {slug:"block-ring", name:"حلقهٔ بلوکی درصد", src:"Quix", file:"component.html"},
-    {slug:"chunk-percent", name:"گیج درصدی تکه‌ای", src:"Quix", file:"component.html"},
-    {slug:"radial-bar-percent", name:"نوار پیشرفت شعاعی", src:"Quix", file:"component.html"},
-    {slug:"bar-glow", name:"نوار پیشرفت درخشان", src:"Quix", file:"component.html"},
-    {slug:"bar-ticks", name:"نوار پیشرفت تیک‌دار", src:"Quix", file:"component.html"},
-    {slug:"bar-chevron", name:"نوار پیشرفت شورون", src:"Quix", file:"component.html"},
-    {slug:"bar-stripes", name:"نوار پیشرفت راه‌راه", src:"Quix", file:"component.html"},
-    {slug:"bar-spark", name:"نوار پیشرفت جرقه‌ای", src:"Quix", file:"component.html"},
-    {slug:"bar-streak", name:"نوار پیشرفت رگهٔ نور", src:"Quix", file:"component.html"},
-    {slug:"bar-dots", name:"نوار پیشرفت نقطه‌ای", src:"Quix", file:"component.html"},
-    {slug:"bar-dot-sparkle", name:"نوار نقطه‌ای درخشان", src:"Quix", file:"component.html"},
-    {slug:"streak-tracker", name:"ردیاب استریک روزانه", src:"d3motion", file:"component.html"},
-    {slug:"collaborator-presence", name:"حضور زندهٔ همکاران", src:"d3motion", file:"component.html"},
-    {slug:"activity-rings", name:"حلقه‌های پیشرفت", src:"d3motion", file:"component.html"},
-    {slug:"countdown-timer", name:"تایمر تمرکز (پومودورو)", src:"d3motion", file:"component.html"},
-    {slug:"battery-monitor", name:"مانیتور باتری چنددستگاهی", src:"d3motion", file:"component.html"},
+    {slug:"multi-arc-percent", name:"گیج درصدی سه‌قوسی", file:"component.html"},
+    {slug:"block-ring", name:"حلقهٔ بلوکی درصد", file:"component.html"},
+    {slug:"chunk-percent", name:"گیج درصدی تکه‌ای", file:"component.html"},
+    {slug:"radial-bar-percent", name:"نوار پیشرفت شعاعی", file:"component.html"},
+    {slug:"bar-dot-sparkle", name:"نوار پیشرفت نوری متحرک", file:"component.html"},
+    {slug:"bar-chevron", name:"نوار پیشرفت شورون", file:"component.html"},
+    {slug:"streak-tracker", name:"ردیاب استریک روزانه", file:"component.html"},
+    {slug:"collaborator-presence", name:"حضور زندهٔ همکاران", file:"component.html"},
+    {slug:"activity-rings", name:"حلقه‌های پیشرفت", file:"component.html"},
+    {slug:"countdown-timer", name:"تایمر تمرکز (پومودورو)", file:"component.html"},
+    {slug:"battery-monitor", name:"مانیتور باتری چنددستگاهی", file:"component.html"},
   ]},
   {cat:"toggles", fa:"سوییچ‌ها", latin:"toggles", h:"h-tog", items:[
-    {slug:"day-night-switch", name:"سوییچ شب و روز", src:"VibeHub", file:"demo.html"},
-    {slug:"theme-toggle", name:"سوییچ شب و روز d3motion", src:"d3motion", file:"component.html"},
-    {slug:"pricing-toggle", name:"سوییچ پلن قیمت", src:"d3motion", file:"component.html"},
+    {slug:"day-night-switch", name:"سوییچ شب و روز انیمیشنی", file:"demo.html"},
+    {slug:"pricing-toggle", name:"سوییچ پلن قیمت", file:"component.html"},
   ]},
   {cat:"buttons", fa:"دکمه‌ها", latin:"buttons", h:"", items:[
-    {slug:"deploy-button", name:"دکمهٔ دیپلوی مورف‌شونده", src:"d3motion", file:"component.html"},
-    {slug:"social-heart-like", name:"دکمهٔ لایک قلب", src:"d3motion", file:"component.html"},
+    {slug:"deploy-button", name:"دکمهٔ دیپلوی مورف‌شونده", file:"component.html"},
+    {slug:"social-heart-like", name:"دکمهٔ لایک قلب", file:"component.html"},
   ]},
   {cat:"glass", fa:"شیشهٔ مایع", latin:"liquid glass", h:"h-glass", items:[
-    {slug:"press-button", name:"دکمهٔ شیشه‌ای — Press", src:"Liquid Glass", file:"demo.html"},
-    {slug:"merge-action-button", name:"دکمهٔ اقدام ذوب‌شونده — Merge", src:"Liquid Glass", file:"demo.html"},
-    {slug:"hold-card", name:"کارت شیشه‌ای — Hold", src:"Liquid Glass", file:"demo.html"},
-    {slug:"share-button-group", name:"گروه دکمه — Share", src:"Liquid Glass", file:"demo.html"},
-    {slug:"flow-badge", name:"نشان شیشه‌ای — Flow", src:"Liquid Glass", file:"demo.html"},
+    {slug:"press-button", name:"دکمهٔ شیشه‌ای — Press", file:"demo.html"},
+    {slug:"merge-action-button", name:"دکمهٔ اقدام ذوب‌شونده — Merge", file:"demo.html"},
+    {slug:"hold-card", name:"کارت شیشه‌ای — Hold", file:"demo.html"},
+    {slug:"share-button-group", name:"گروه دکمه — Share", file:"demo.html"},
+    {slug:"flow-badge", name:"نشان شیشه‌ای — Flow", file:"demo.html"},
   ]},
   {cat:"cards", fa:"کارت‌ها", latin:"cards", h:"", items:[
-    {slug:"music-player", name:"پلیر موسیقی Now Playing", src:"d3motion", file:"component.html"},
-    {slug:"weather-clock", name:"ساعت جهانی و آب‌وهوا", src:"d3motion", file:"component.html"},
-    {slug:"notification-stack", name:"مرکز اعلان انباشته", src:"d3motion", file:"component.html"},
-    {slug:"auth-card", name:"کارت لاگین شیشه‌ای مدرن", src:"VibePrompt", file:"component.html"},
-    {slug:"bento-tile", name:"تایل بنتو هوشمند و انیمیشنی", src:"VibePrompt", file:"component.html"},
-    {slug:"pricing-tier", name:"کارت قیمت‌گذاری حرفه‌ای SaaS", src:"VibePrompt", file:"component.html"},
+    {slug:"auth-card", name:"کارت لاگین شیشه‌ای مدرن", file:"component.html"},
+    {slug:"bento-tile", name:"تایل بنتو هوشمند و انیمیشنی", file:"component.html"},
+    {slug:"pricing-tier", name:"کارت قیمت‌گذاری حرفه‌ای SaaS", file:"component.html"},
+    {slug:"music-player", name:"پلیر موسیقی Now Playing", file:"component.html"},
+    {slug:"weather-clock", name:"ساعت جهانی و آب‌وهوا", file:"component.html"},
+    {slug:"notification-stack", name:"مرکز اعلان انباشته", file:"component.html"},
   ]},
   {cat:"inputs", fa:"ورودی‌ها", latin:"inputs", h:"", items:[
-    {slug:"otp-verification", name:"تأیید کد ۶ رقمی OTP", src:"d3motion", file:"component.html"},
-    {slug:"volume-brightness-sliders", name:"اسلایدر صدا و روشنایی", src:"d3motion", file:"component.html"},
-    {slug:"color-picker", name:"انتخابگر رنگ HSL", src:"d3motion", file:"component.html"},
+    {slug:"otp-verification", name:"تأیید کد ۶ رقمی OTP", file:"component.html"},
+    {slug:"volume-brightness-sliders", name:"اسلایدر صدا و روشنایی", file:"component.html"},
+    {slug:"color-picker", name:"انتخابگر رنگ HSL", file:"component.html"},
   ]},
   {cat:"navigation", fa:"ناوبری", latin:"navigation", h:"", items:[
-    {slug:"segmented-control", name:"کنترل ناوبری سگمنتی", src:"d3motion", file:"component.html"},
-    {slug:"weekly-calendar", name:"نوار تقویم هفتگی", src:"d3motion", file:"component.html"},
-    {slug:"route-navigation", name:"ناوبری زندهٔ GPS", src:"d3motion", file:"component.html"},
-    {slug:"command-palette", name:"کامند پلت ⌘K", src:"d3motion", file:"component.html"},
+    {slug:"command-palette", name:"کامند پلت ⌘K", file:"component.html"},
+    {slug:"segmented-control", name:"کنترل ناوبری سگمنتی", file:"component.html"},
+    {slug:"weekly-calendar", name:"نوار تقویم هفتگی", file:"component.html"},
+    {slug:"route-navigation", name:"ناوبری زندهٔ GPS", file:"component.html"},
   ]},
   {cat:"interactions", fa:"تعاملات", latin:"interactions", h:"", items:[
-    {slug:"task-checklist", name:"چک‌لیست تعاملی", src:"d3motion", file:"component.html"},
-    {slug:"file-upload", name:"پیشرفت آپلود فایل", src:"d3motion", file:"component.html"},
-    {slug:"chat-stream", name:"جریان چت زنده", src:"d3motion", file:"component.html"},
-    {slug:"kanban-board", name:"برد کانبان اسپرینت", src:"d3motion", file:"component.html"},
-    {slug:"onboarding-step", name:"ویزارد خوش‌آمدگویی چندمرحله‌ای", src:"VibePrompt", file:"component.html"},
+    {slug:"onboarding-step", name:"ویزارد خوش‌آمدگویی چندمرحله‌ای", file:"component.html"},
+    {slug:"task-checklist", name:"چک‌لیست تعاملی", file:"component.html"},
+    {slug:"file-upload", name:"پیشرفت آپلود فایل", file:"component.html"},
+    {slug:"chat-stream", name:"جریان چت زنده", file:"component.html"},
+    {slug:"kanban-board", name:"برد کانبان اسپرینت", file:"component.html"},
   ]},
   {cat:"showcase", fa:"ویترین محصول", latin:"showcase", h:"h-show", items:[
-    {slug:"cake-couch", name:"Cake Couch — نمایش محصول انیمیشنی", src:"GitHub", file:"index.html", note:"برای بارگذاری art.svg به سرور محلی نیاز دارد"},
+    {slug:"cake-couch", name:"Cake Couch — نمایش محصول انیمیشنی", file:"index.html", note:"برای بارگذاری art.svg به سرور محلی نیاز دارد"},
   ]},
   {cat:"text", fa:"انیمیشن‌های متن", latin:"typography", h:"", items:[
-    {slug:"typewriter-reveal", name:"تایپ ماشین‌نویسی پویا", src:"Handbook", file:"component.html"},
-    {slug:"gradient-shimmer", name:"درخشش گرادیانی متن", src:"Handbook", file:"component.html"},
-    {slug:"staggered-wave", name:"موج متحرک حروف", src:"Handbook", file:"component.html"},
+    {slug:"typewriter-reveal", name:"تایپ ماشین‌نویسی پویا", file:"component.html"},
+    {slug:"gradient-shimmer", name:"درخشش گرادیانی متن", file:"component.html"},
+    {slug:"staggered-wave", name:"موج متحرک حروف", file:"component.html"},
   ]},
   {cat:"backgrounds", fa:"افکت‌های پس‌زمینه", latin:"backgrounds", h:"", items:[
-    {slug:"particle-constellation", name:"صورت فلکی ذرات تعاملی", src:"Handbook", file:"component.html"},
-    {slug:"synthwave-grid", name:"افق شبکهٔ سینت‌ویو Retro", src:"Handbook", file:"component.html"},
-    {slug:"dynamic-grid", name:"شبکهٔ نقطه‌ای نوسانی", src:"Handbook", file:"component.html"},
+    {slug:"particle-constellation", name:"صورت فلکی ذرات تعاملی", file:"component.html"},
+    {slug:"synthwave-grid", name:"افق شبکهٔ سینت‌ویو Retro", file:"component.html"},
+    {slug:"dynamic-grid", name:"شبکهٔ نقطه‌ای نوسانی", file:"component.html"},
   ]},
   {cat:"transitions", fa:"ترانزیشن و ورود", latin:"transitions", h:"", items:[
-    {slug:"staggered-entrance", name:"ورود متوالی لیست", src:"Handbook", file:"component.html"},
-    {slug:"flip-card-switch", name:"چرخش ۳بعدی تغییر نما", src:"Handbook", file:"component.html"},
-    {slug:"elastic-scale", name:"تغییر شکل الاستیک مورفینگ", src:"Handbook", file:"component.html"},
+    {slug:"staggered-entrance", name:"ورود متوالی لیست", file:"component.html"},
+    {slug:"flip-card-switch", name:"چرخش ۳بعدی تغییر نما", file:"component.html"},
+    {slug:"elastic-scale", name:"تغییر شکل الاستیک مورفینگ", file:"component.html"},
   ]},
   {cat:"scroll", fa:"انیمیشن‌های اسکرول", latin:"scroll motion", h:"", items:[
-    {slug:"parallax-layers", name:"لایه‌های پارالاکس چندعمقی", src:"Handbook", file:"component.html"},
-    {slug:"scroll-reveal", name:"آشکارسازی پیوسته ویوپورت", src:"Handbook", file:"component.html"},
+    {slug:"parallax-layers", name:"لایه‌های پارالاکس چندعمقی", file:"component.html"},
+    {slug:"scroll-reveal", name:"آشکارسازی پیوسته ویوپورت", file:"component.html"},
   ]},
   {cat:"feedback", fa:"بازخورد و وضعیت", latin:"feedback", h:"", items:[
-    {slug:"skeleton-loader", name:"اسکلتون لودر درخشان", src:"Handbook", file:"component.html"},
-    {slug:"toast-notification", name:"توئست اعلان شناور", src:"Handbook", file:"component.html"},
+    {slug:"skeleton-loader", name:"اسکلتون لودر درخشان", file:"component.html"},
+    {slug:"toast-notification", name:"توئست اعلان شناور", file:"component.html"},
   ]},
 ];
 
@@ -382,47 +377,81 @@ function showToast(msg){
   setTimeout(() => toast.classList.remove("show"), 2000);
 }
 
-// مقداردهی سرصفحه
-const total = CATALOG.reduce((a, c) => a + c.items.length, 0);
-document.getElementById("total").textContent = faNum(total) + " آیتم زنده";
+const totalItems = CATALOG.reduce((a, c) => a + c.items.length, 0);
+document.getElementById("summaryCount").textContent = `${faNum(totalItems)} کامپوننت در ${faNum(CATALOG.length)} گروه کارکردی`;
 
+// رندر پیل‌های ناوبری
 const pills = document.getElementById("pills");
 for (const c of CATALOG) {
   const b = document.createElement("button");
   b.className = "pill";
+  b.id = "pill-" + c.cat;
   b.textContent = c.fa;
   const n = document.createElement("span");
   n.className = "badge"; n.textContent = faNum(c.items.length);
   b.append(n);
   b.addEventListener("click", () => {
-    document.querySelectorAll(".pill.active").forEach(x => x.classList.remove("active"));
-    b.classList.add("active");
-    document.getElementById(c.cat).scrollIntoView({behavior:"smooth"});
+    const sec = document.getElementById(c.cat);
+    if (!sec.classList.contains("expanded")) {
+      toggleSectionExpand(sec, true);
+    }
+    sec.scrollIntoView({behavior:"smooth"});
   });
   pills.append(b);
 }
-pills.firstElementChild.classList.add("active");
 
-// رندر کارت‌ها
+// ساخت کارت‌ها
 const wrap = document.getElementById("sections");
+function toggleSectionExpand(sec, forceState){
+  const shouldExpand = forceState !== undefined ? forceState : !sec.classList.contains("expanded");
+  sec.classList.toggle("expanded", shouldExpand);
+  const btn = sec.querySelector(".expand-toggle");
+  if(btn){
+    const extraCount = sec.querySelectorAll(".card.is-secondary").length;
+    btn.querySelector("span").textContent = shouldExpand ? "بستن موارد دیگر" : `مشاهده همه (${faNum(extraCount + 1)})`;
+  }
+}
+
 for (const c of CATALOG) {
   const sec = document.createElement("section");
   sec.id = c.cat;
+  sec.dataset.groupName = c.fa;
   
   const head = document.createElement("div");
   head.className = "sec-head";
+  const titleWrap = document.createElement("div");
+  titleWrap.className = "sec-title-wrap";
   const h2 = document.createElement("h2"); h2.textContent = c.fa;
   const latin = document.createElement("span"); latin.className = "latin"; latin.textContent = c.latin;
-  const cnt = document.createElement("span"); cnt.className = "c"; cnt.textContent = faNum(c.items.length);
-  head.append(h2, latin, cnt);
+  titleWrap.append(h2, latin);
+
+  const expandBtn = document.createElement("button");
+  expandBtn.className = "expand-toggle";
+  const extraCount = c.items.length - 1;
+  expandBtn.innerHTML = `<span>${extraCount > 0 ? `مشاهده همه (${faNum(c.items.length)})` : 'شاخص'}</span>
+    ${extraCount > 0 ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>' : ''}`;
+  if(extraCount > 0){
+    expandBtn.addEventListener("click", () => toggleSectionExpand(sec));
+  } else {
+    expandBtn.style.cursor = "default";
+  }
+
+  head.append(titleWrap, expandBtn);
 
   const grid = document.createElement("div"); grid.className = "grid";
-  for (const it of c.items) {
+  c.items.forEach((it, idx) => {
     const filePath = `${c.cat}/${it.slug}/${it.file}`;
     const fig = document.createElement("figure");
-    fig.className = "card";
+    fig.className = "card" + (idx > 0 ? " is-secondary" : "");
     fig.dataset.fa = it.name;
     fig.dataset.slug = it.slug;
+
+    if (idx === 0 && c.items.length > 1) {
+      const fb = document.createElement("div");
+      fb.className = "featured-badge";
+      fb.textContent = "نمونه شاخص";
+      fig.append(fb);
+    }
 
     const pv = document.createElement("div");
     pv.className = "preview " + (c.h || "");
@@ -445,15 +474,12 @@ for (const c of CATALOG) {
     const actions = document.createElement("div");
     actions.className = "card-actions";
 
-    const srcTag = document.createElement("span");
-    srcTag.className = `src-tag tag-${it.src.replace(/\s+/g,'')}`;
-    srcTag.textContent = it.src;
-
     const copyBtn = document.createElement("button");
     copyBtn.className = "btn-icon";
     copyBtn.title = "کپی مسیر فایل";
-    copyBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
-    copyBtn.addEventListener("click", () => {
+    copyBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+    copyBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
       navigator.clipboard.writeText(filePath);
       showToast("مسیر فایل کپی شد: " + filePath);
     });
@@ -462,18 +488,29 @@ for (const c of CATALOG) {
     openLink.className = "btn-icon";
     openLink.href = filePath;
     openLink.target = "_blank";
-    openLink.title = "مشاهده تمام‌صفحه در تب جدید";
-    openLink.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+    openLink.title = "مشاهده تمام‌صفحه";
+    openLink.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 
-    actions.append(srcTag, copyBtn, openLink);
+    actions.append(copyBtn, openLink);
     footer.append(info, actions);
     fig.append(pv, footer);
     grid.append(fig);
-  }
+  });
 
   sec.append(head, grid);
   wrap.append(sec);
 }
+
+// دکمه تغییر حالت نمایش همه / شاخص‌ها
+let allExpanded = false;
+const toggleViewBtn = document.getElementById("toggleViewBtn");
+const viewModeText = document.getElementById("viewModeText");
+toggleViewBtn.addEventListener("click", () => {
+  allExpanded = !allExpanded;
+  document.querySelectorAll("section").forEach(sec => toggleSectionExpand(sec, allExpanded));
+  toggleViewBtn.classList.toggle("active", allExpanded);
+  viewModeText.textContent = allExpanded ? "نمایش شاخص‌ها" : "نمایش همه";
+});
 
 // بارگذاری تنبل iframe
 const io = new IntersectionObserver(entries => {
@@ -487,12 +524,49 @@ const io = new IntersectionObserver(entries => {
 }, {rootMargin: "400px"});
 document.querySelectorAll("iframe[data-src]").forEach(fr => io.observe(fr));
 
-// جستجوی بلادرنگ
+// اسکرول‌اسپای هوشمند (Scroll-Spy)
+const currentGroupBadge = document.getElementById("currentGroup");
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+  let activeSec = null;
+  const scrollY = window.scrollY + 180;
+
+  for (const sec of sections) {
+    if (sec.offsetTop <= scrollY && (sec.offsetTop + sec.offsetHeight) > scrollY) {
+      activeSec = sec;
+      break;
+    }
+  }
+
+  if (activeSec) {
+    currentGroupBadge.textContent = activeSec.dataset.groupName;
+    document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+    const activePill = document.getElementById("pill-" + activeSec.id);
+    if (activePill) {
+      activePill.classList.add("active");
+      activePill.scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    }
+  } else if (window.scrollY < 120) {
+    currentGroupBadge.textContent = "تمام گروه‌ها";
+    document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+  }
+}, {passive:true});
+
+// جستجو
 const q = document.getElementById("q");
 const noResult = document.getElementById("no-result");
 q.addEventListener("input", () => {
   const t = q.value.trim().toLowerCase();
   let visible = 0;
+  
+  if (t) {
+    // هنگام سرچ همه گروه‌ها را باز می‌کنیم تا نتایج دیده شوند
+    document.querySelectorAll("section").forEach(sec => sec.classList.add("expanded"));
+  } else if (!allExpanded) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("expanded"));
+  }
+
   for (const sec of wrap.querySelectorAll("section")) {
     let secVisible = 0;
     for (const card of sec.querySelectorAll(".card")) {
@@ -507,7 +581,7 @@ q.addEventListener("input", () => {
   noResult.style.display = visible ? "none" : "block";
 });
 
-// کلید میانبر جستجو (Ctrl+K یا ⌘K)
+// میانبر ⌘K
 window.addEventListener("keydown", (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
     e.preventDefault();
