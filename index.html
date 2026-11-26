@@ -684,7 +684,11 @@ function openCodeModal(name, slug, path) {
       modalCodeBlock.textContent = code;
     })
     .catch(err => {
-      modalCodeBlock.textContent = "خطا در دریافت کد فایل: " + err.message;
+      if (window.location.protocol === "file:") {
+        modalCodeBlock.textContent = `/* راهنمای دسترسی به کد در حالت بازگشایی محلی (file:///):\n   به دلیل محدودیت‌های امنیتی مرورگرها در واکشی فایل از روی دیسک،\n   کد کامل به شکل خودکار در محیط وب‌سرور (GitHub Pages یا Live Server) لود می‌شود.\n\n   برای مشاهده و برداشتن کد در این حالت، دکمه «اجرای تمام‌صفحه» بالا را بزنید\n   و در تب جدید با کلیدهای Ctrl+U سورس‌کد خالص را دریافت کنید.\n   یا نسخه آنلاین را مشاهده فرمایید: https://ahmadkhanloo.github.io/ui-vault/ */`;
+      } else {
+        modalCodeBlock.textContent = "خطا در دریافت کد فایل: " + err.message;
+      }
     });
 }
 
