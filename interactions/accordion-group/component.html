@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Shadcn Interactive Accordion</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:100%;height:100vh;overflow:hidden;background:transparent!important;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Plus Jakarta Sans',sans-serif;color:#F1F5F9;
+}
+.accordion-box{
+  width:260px;background:#111318;border-radius:18px;border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 12px 32px rgba(0,0,0,0.5);overflow:hidden;padding:8px;
+}
+.item{
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.item:last-child{border-bottom:none}
+.trigger{
+  width:100%;padding:10px 12px;background:none;border:none;color:#FFF;
+  font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;text-align:left;transition:color 0.2s;
+}
+.trigger:hover{color:#38BDF8}
+.trigger svg{
+  color:#94A3B8;transition:transform 0.25s cubic-bezier(0.16,1,0.3,1);flex-shrink:0;
+}
+.item.open .trigger svg{transform:rotate(180deg);color:#38BDF8}
+.content{
+  max-height:0;overflow:hidden;transition:max-height 0.3s cubic-bezier(0.16,1,0.3,1);
+  padding:0 12px;font-size:11px;color:#94A3B8;line-height:1.5;
+}
+.item.open .content{
+  max-height:80px;padding-bottom:10px;
+}
+</style>
+</head>
+<body>
+<div class="accordion-box">
+  <div class="item open">
+    <button class="trigger">
+      <span>Zero-dependency runtime?</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="content">
+      Yes. Every component executes in vanilla HTML, CSS and pure JS with no npm packages.
+    </div>
+  </div>
+  <div class="item">
+    <button class="trigger">
+      <span>Tailwind & React ready?</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="content">
+      Easily adapt classes and DOM structure into your JSX or Vue templates in seconds.
+    </div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const parent = btn.parentElement;
+    const wasOpen = parent.classList.contains('open');
+    document.querySelectorAll('.item').forEach(i => i.classList.remove('open'));
+    if(!wasOpen) parent.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Interactive Popover Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:100%;height:100vh;overflow:hidden;background:transparent!important;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Plus Jakarta Sans',sans-serif;color:#FFF;
+}
+.popover-wrap{
+  width:240px;background:#14161F;border-radius:16px;border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 14px 36px rgba(0,0,0,0.6);padding:16px;display:flex;flex-direction:column;gap:10px;
+  position:relative;animation:float 3.5s ease-in-out infinite alternate;
+}
+.popover-wrap::after{
+  content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%) rotate(45deg);
+  width:12px;height:12px;background:#14161F;border-right:1px solid rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.head{display:flex;align-items:center;gap:8px}
+.avatar{
+  width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg, #38BDF8, #818CF8);
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#090A0D;
+}
+.user-info{display:flex;flex-direction:column}
+.name{font-size:12px;font-weight:700}
+.handle{font-size:10px;color:#94A3B8}
+.desc{font-size:11px;color:#CBD5E1;line-height:1.4}
+.meta-row{display:flex;align-items:center;gap:12px;font-size:10px;color:#94A3B8}
+.badge{color:#38BDF8;font-weight:600}
+@keyframes float{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-5px)}
+}
+</style>
+</head>
+<body>
+<div class="popover-wrap">
+  <div class="head">
+    <div class="avatar">AG</div>
+    <div class="user-info">
+      <span class="name">Antigravity Core</span>
+      <span class="handle">@deepmind &bull; verified</span>
+    </div>
+  </div>
+  <div class="desc">
+    Autonomous high-velocity agent orchestrating reactive UI systems.
+  </div>
+  <div class="meta-row">
+    <span><strong class="badge">72</strong> components</span>
+    <span><strong class="badge">15</strong> categories</span>
+  </div>
+</div>
+</body>
+</html>
