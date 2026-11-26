@@ -39,22 +39,22 @@ body{
 }
 a{color:inherit;text-decoration:none}
 
-/* ---------- هدر چسبان هوشمند ---------- */
+/* ---------- هدر شیک ---------- */
 header{
   position:sticky;top:0;z-index:50;
-  background:rgba(9,10,13,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  background:rgba(9,10,13,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
 }
 .head-inner{
   max-width:var(--maxw);margin:0 auto;
-  padding:14px 24px 10px;display:flex;flex-direction:column;gap:12px;
+  padding:14px 24px 12px;display:flex;flex-direction:column;gap:12px;
 }
 .top-bar{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
 .brand{display:flex;align-items:center;gap:10px}
 .logo-icon{
-  width:30px;height:30px;border-radius:9px;
+  width:32px;height:32px;border-radius:10px;
   background:linear-gradient(135deg, #38BDF8, #818CF8);
   display:flex;align-items:center;justify-content:center;
   color:#090A0D;font-weight:800;font-size:14px;box-shadow:0 0 16px rgba(56,189,248,0.35);
@@ -69,21 +69,16 @@ h1{
   background:rgba(56,189,248,0.1);padding:2px 10px;border-radius:20px;
   border:1px solid rgba(56,189,248,0.2);display:inline-block;transition:all 0.2s;
 }
-.header-actions{display:flex;align-items:center;gap:8px}
-.view-mode-btn{
-  display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;
-  color:var(--muted);background:var(--surface);padding:6px 12px;
-  border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;
-}
-.view-mode-btn:hover{color:#FFF;background:var(--surface-2);border-color:var(--border-strong)}
-.view-mode-btn.active{color:var(--accent);border-color:var(--accent);background:rgba(56,189,248,0.08)}
 
-/* ابزارهای سرچ و فیلتر */
+/* ابزارهای جستجو و پیل‌ها (چندخطی بدون اسکرول افقی) */
 .tools{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  display:flex;flex-direction:column;gap:10px;
+}
+.search-row{
+  display:flex;align-items:center;gap:12px;
 }
 .search-box{
-  position:relative;display:flex;align-items:center;flex:1 1 240px;max-width:340px;
+  position:relative;display:flex;align-items:center;flex:1 1 240px;max-width:380px;
 }
 .search-icon{
   position:absolute;right:12px;color:var(--faint);pointer-events:none;
@@ -103,16 +98,16 @@ h1{
   color:var(--faint);background:rgba(255,255,255,0.06);
   padding:2px 5px;border-radius:4px;border:1px solid var(--border);
 }
-.pills-scroll{
-  display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:4px;
-  scrollbar-width:none;-ms-overflow-style:none;flex:1 1 100%;
+
+/* دسته‌ها به صورت چندخطی دیده می‌شوند و اسکرول به راست ندارند */
+.pills-wrap{
+  display:flex;align-items:center;flex-wrap:wrap;gap:6px;
 }
-.pills-scroll::-webkit-scrollbar{display:none}
 .pill{
-  flex-shrink:0;cursor:pointer;font-size:12px;font-weight:500;
+  cursor:pointer;font-size:12px;font-weight:500;
   color:var(--muted);background:var(--surface);
-  border:1px solid var(--border);border-radius:16px;
-  padding:4px 11px;transition:all 0.2s;display:flex;align-items:center;gap:6px;
+  border:1px solid var(--border);border-radius:14px;
+  padding:4px 10px;transition:all 0.2s;display:flex;align-items:center;gap:6px;
 }
 .pill:hover{color:#FFF;border-color:var(--border-strong);background:var(--surface-2)}
 .pill.active{
@@ -123,6 +118,51 @@ h1{
 
 /* ---------- محتوای اصلی ---------- */
 main{max-width:var(--maxw);margin:0 auto;padding:20px 24px 80px;width:100%}
+
+/* ویترین اولیه شاهدی (گالری شاهدی همه گروه‌ها در کنار هم) */
+.hero-overview{
+  margin-bottom:34px;background:linear-gradient(180deg, rgba(23,26,33,0.5) 0%, transparent 100%);
+  border:1px solid var(--border);border-radius:20px;padding:22px;
+}
+.hero-header{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;
+}
+.hero-title{display:flex;align-items:baseline;gap:8px}
+.hero-title h2{font-size:18px;font-weight:800;color:#FFF}
+.hero-title span{font-size:12px;color:var(--muted)}
+
+.hero-grid{
+  display:grid;gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+}
+.hero-item{
+  display:flex;flex-direction:column;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  transition:all 0.25s cubic-bezier(0.16,1,0.3,1);cursor:pointer;position:relative;
+}
+.hero-item:hover{
+  border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.5);
+}
+.hero-preview{
+  height:190px;background:#0F1116;position:relative;overflow:hidden;
+}
+.hero-preview iframe{
+  width:100%;height:100%;border:0;display:block;pointer-events:none;
+}
+.hero-meta{
+  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface);border-top:1px solid var(--border);
+}
+.hero-group-label{
+  font-size:13px;font-weight:700;color:#FFF;
+}
+.hero-count-badge{
+  font-size:11px;color:var(--accent);background:rgba(56,189,248,0.12);
+  padding:2px 8px;border-radius:12px;border:1px solid rgba(56,189,248,0.25);
+  font-family:var(--font-mono);font-weight:600;
+}
+
+/* بخش‌های تفصیلی زیرین */
 section{padding-block:16px 8px;scroll-margin-top:140px}
 .sec-head{
   display:flex;align-items:center;justify-content:space-between;
@@ -134,16 +174,8 @@ section{padding-block:16px 8px;scroll-margin-top:140px}
   direction:ltr;font-family:var(--font-mono);font-size:11px;
   color:var(--faint);text-transform:uppercase;letter-spacing:1px;
 }
-.expand-toggle{
-  background:none;border:none;color:var(--muted);font-family:var(--font-body);
-  font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;
-  transition:all 0.2s;padding:4px 8px;border-radius:6px;
-}
-.expand-toggle:hover{color:var(--accent);background:var(--surface-2)}
-.expand-toggle svg{transition:transform 0.2s}
-.expanded .expand-toggle svg{transform:rotate(180deg)}
 
-/* شبکه کارت‌ها */
+/* شبکه کارت‌های استاندارد */
 .grid{
   display:grid;gap:16px;
   grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
@@ -157,9 +189,6 @@ figure.card:hover{
   border-color:var(--border-strong);transform:translateY(-3px);
   box-shadow:0 12px 30px rgba(0,0,0,0.5);
 }
-figure.card.is-secondary{display:none}
-.expanded figure.card.is-secondary{display:flex}
-
 .preview{
   position:relative;height:230px;
   display:flex;align-items:center;justify-content:center;
@@ -173,14 +202,6 @@ figure.card.is-secondary{display:none}
 .preview.h-show{height:300px}
 .preview iframe{
   width:100%;height:100%;border:0;display:block;background:transparent;
-}
-
-/* کارت شاخص با نشانگر برجسته */
-.featured-badge{
-  position:absolute;top:10px;right:10px;background:rgba(56,189,248,0.15);
-  border:1px solid rgba(56,189,248,0.35);color:var(--accent);
-  padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600;
-  backdrop-filter:blur(8px);pointer-events:none;z-index:2;
 }
 
 /* پاورقی کارت */
@@ -239,27 +260,37 @@ footer{
           <span class="current-group-badge" id="currentGroup">تمام گروه‌ها</span>
         </div>
       </div>
-      <div class="header-actions">
-        <button class="view-mode-btn" id="toggleViewBtn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span id="viewModeText">نمایش همه</span>
-        </button>
-      </div>
     </div>
 
     <div class="tools">
-      <div class="search-box">
-        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input id="q" type="search" class="search-input" placeholder="جستجو در میان کامپوننت‌ها..." aria-label="جستجو">
-        <span class="kbd-shortcut">⌘K</span>
+      <div class="search-row">
+        <div class="search-box">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input id="q" type="search" class="search-input" placeholder="جستجو در میان کامپوننت‌ها..." aria-label="جستجو">
+          <span class="kbd-shortcut">⌘K</span>
+        </div>
       </div>
-      <nav class="pills-scroll" id="pills" aria-label="دسته‌بندی"></nav>
+      <!-- دسته‌ها چندخطی هستند و همه یکجا دیده می‌شوند -->
+      <nav class="pills-wrap" id="pills" aria-label="دسته‌بندی"></nav>
     </div>
   </div>
 </header>
 
 <main>
+  <!-- ویترین شاخص‌های اولیه: از هر گروه یک نمونه کنار هم برای دیدن کلی با یک نگاه -->
+  <section class="hero-overview" id="overview">
+    <div class="hero-header">
+      <div class="hero-title">
+        <h2>ویترین شاخص هر گروه</h2>
+        <span>با کلیک روی هر کارت، کل مجموعهٔ آن گروه باز می‌شود</span>
+      </div>
+    </div>
+    <div class="hero-grid" id="heroGrid"></div>
+  </section>
+
   <div class="no-result" id="no-result">هیچ کامپوننتی مطابق با جستجوی شما یافت نشد.</div>
+  
+  <!-- بخش‌های تمام کامپوننت‌ها -->
   <div id="sections"></div>
 </main>
 
@@ -273,7 +304,7 @@ footer{
 </footer>
 
 <script>
-// پالایش کارکردی کاتالوگ: حذف موارد موازی که کارکرد یکسان دارند
+// کاتالوگ با پالایش کارکردی
 const CATALOG = [
   {cat:"charts", fa:"نمودارها", latin:"charts", h:"h-charts", items:[
     {slug:"candlestick", name:"کندل‌استیک BTC/USD", file:"component.html"},
@@ -380,7 +411,7 @@ function showToast(msg){
 const totalItems = CATALOG.reduce((a, c) => a + c.items.length, 0);
 document.getElementById("summaryCount").textContent = `${faNum(totalItems)} کامپوننت در ${faNum(CATALOG.length)} گروه کارکردی`;
 
-// رندر پیل‌های ناوبری
+// رندر پیل‌های ناوبری (چندخطی، بدون اسکرول افقی)
 const pills = document.getElementById("pills");
 for (const c of CATALOG) {
   const b = document.createElement("button");
@@ -391,27 +422,45 @@ for (const c of CATALOG) {
   n.className = "badge"; n.textContent = faNum(c.items.length);
   b.append(n);
   b.addEventListener("click", () => {
-    const sec = document.getElementById(c.cat);
-    if (!sec.classList.contains("expanded")) {
-      toggleSectionExpand(sec, true);
-    }
-    sec.scrollIntoView({behavior:"smooth"});
+    document.getElementById(c.cat).scrollIntoView({behavior:"smooth"});
   });
   pills.append(b);
 }
 
-// ساخت کارت‌ها
-const wrap = document.getElementById("sections");
-function toggleSectionExpand(sec, forceState){
-  const shouldExpand = forceState !== undefined ? forceState : !sec.classList.contains("expanded");
-  sec.classList.toggle("expanded", shouldExpand);
-  const btn = sec.querySelector(".expand-toggle");
-  if(btn){
-    const extraCount = sec.querySelectorAll(".card.is-secondary").length;
-    btn.querySelector("span").textContent = shouldExpand ? "بستن موارد دیگر" : `مشاهده همه (${faNum(extraCount + 1)})`;
-  }
+// رندر ویترین شاخص‌ها (Hero Overview Grid): از هر گروه یک نمونه
+const heroGrid = document.getElementById("heroGrid");
+for (const c of CATALOG) {
+  const featured = c.items[0];
+  const itemEl = document.createElement("div");
+  itemEl.className = "hero-item";
+  itemEl.title = `مشاهده تمام آیتم‌های ${c.fa}`;
+  
+  const pv = document.createElement("div");
+  pv.className = "hero-preview";
+  const fr = document.createElement("iframe");
+  fr.loading = "lazy";
+  fr.dataset.src = `${c.cat}/${featured.slug}/${featured.file}`;
+  pv.append(fr);
+
+  const meta = document.createElement("div");
+  meta.className = "hero-meta";
+  const label = document.createElement("span");
+  label.className = "hero-group-label";
+  label.textContent = c.fa;
+  const count = document.createElement("span");
+  count.className = "hero-count-badge";
+  count.textContent = `${faNum(c.items.length)} آیتم`;
+  meta.append(label, count);
+
+  itemEl.append(pv, meta);
+  itemEl.addEventListener("click", () => {
+    document.getElementById(c.cat).scrollIntoView({behavior:"smooth"});
+  });
+  heroGrid.append(itemEl);
 }
 
+// ساخت تمام بخش‌های کامل
+const wrap = document.getElementById("sections");
 for (const c of CATALOG) {
   const sec = document.createElement("section");
   sec.id = c.cat;
@@ -424,34 +473,15 @@ for (const c of CATALOG) {
   const h2 = document.createElement("h2"); h2.textContent = c.fa;
   const latin = document.createElement("span"); latin.className = "latin"; latin.textContent = c.latin;
   titleWrap.append(h2, latin);
-
-  const expandBtn = document.createElement("button");
-  expandBtn.className = "expand-toggle";
-  const extraCount = c.items.length - 1;
-  expandBtn.innerHTML = `<span>${extraCount > 0 ? `مشاهده همه (${faNum(c.items.length)})` : 'شاخص'}</span>
-    ${extraCount > 0 ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>' : ''}`;
-  if(extraCount > 0){
-    expandBtn.addEventListener("click", () => toggleSectionExpand(sec));
-  } else {
-    expandBtn.style.cursor = "default";
-  }
-
-  head.append(titleWrap, expandBtn);
+  head.append(titleWrap);
 
   const grid = document.createElement("div"); grid.className = "grid";
-  c.items.forEach((it, idx) => {
+  c.items.forEach((it) => {
     const filePath = `${c.cat}/${it.slug}/${it.file}`;
     const fig = document.createElement("figure");
-    fig.className = "card" + (idx > 0 ? " is-secondary" : "");
+    fig.className = "card";
     fig.dataset.fa = it.name;
     fig.dataset.slug = it.slug;
-
-    if (idx === 0 && c.items.length > 1) {
-      const fb = document.createElement("div");
-      fb.className = "featured-badge";
-      fb.textContent = "نمونه شاخص";
-      fig.append(fb);
-    }
 
     const pv = document.createElement("div");
     pv.className = "preview " + (c.h || "");
@@ -501,17 +531,6 @@ for (const c of CATALOG) {
   wrap.append(sec);
 }
 
-// دکمه تغییر حالت نمایش همه / شاخص‌ها
-let allExpanded = false;
-const toggleViewBtn = document.getElementById("toggleViewBtn");
-const viewModeText = document.getElementById("viewModeText");
-toggleViewBtn.addEventListener("click", () => {
-  allExpanded = !allExpanded;
-  document.querySelectorAll("section").forEach(sec => toggleSectionExpand(sec, allExpanded));
-  toggleViewBtn.classList.toggle("active", allExpanded);
-  viewModeText.textContent = allExpanded ? "نمایش شاخص‌ها" : "نمایش همه";
-});
-
 // بارگذاری تنبل iframe
 const io = new IntersectionObserver(entries => {
   for (const e of entries) {
@@ -524,13 +543,13 @@ const io = new IntersectionObserver(entries => {
 }, {rootMargin: "400px"});
 document.querySelectorAll("iframe[data-src]").forEach(fr => io.observe(fr));
 
-// اسکرول‌اسپای هوشمند (Scroll-Spy)
+// اسکرول‌اسپای هوشمند
 const currentGroupBadge = document.getElementById("currentGroup");
-const sections = document.querySelectorAll("section");
+const sections = document.querySelectorAll("section[id]:not(#overview)");
 
 window.addEventListener("scroll", () => {
   let activeSec = null;
-  const scrollY = window.scrollY + 180;
+  const scrollY = window.scrollY + 200;
 
   for (const sec of sections) {
     if (sec.offsetTop <= scrollY && (sec.offsetTop + sec.offsetHeight) > scrollY) {
@@ -543,12 +562,9 @@ window.addEventListener("scroll", () => {
     currentGroupBadge.textContent = activeSec.dataset.groupName;
     document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
     const activePill = document.getElementById("pill-" + activeSec.id);
-    if (activePill) {
-      activePill.classList.add("active");
-      activePill.scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
-    }
-  } else if (window.scrollY < 120) {
-    currentGroupBadge.textContent = "تمام گروه‌ها";
+    if (activePill) activePill.classList.add("active");
+  } else {
+    currentGroupBadge.textContent = "ویترین شاهدی";
     document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
   }
 }, {passive:true});
@@ -556,15 +572,16 @@ window.addEventListener("scroll", () => {
 // جستجو
 const q = document.getElementById("q");
 const noResult = document.getElementById("no-result");
+const overviewSec = document.getElementById("overview");
+
 q.addEventListener("input", () => {
   const t = q.value.trim().toLowerCase();
   let visible = 0;
   
   if (t) {
-    // هنگام سرچ همه گروه‌ها را باز می‌کنیم تا نتایج دیده شوند
-    document.querySelectorAll("section").forEach(sec => sec.classList.add("expanded"));
-  } else if (!allExpanded) {
-    document.querySelectorAll("section").forEach(sec => sec.classList.remove("expanded"));
+    overviewSec.style.display = "none";
+  } else {
+    overviewSec.style.display = "";
   }
 
   for (const sec of wrap.querySelectorAll("section")) {
