@@ -143,7 +143,7 @@ figure.card{
   overflow:hidden;transition:all 0.25s cubic-bezier(0.16,1,0.3,1);position:relative;
 }
 figure.card:hover{
-  border-color:var(--border-strong);transform:translateY(-3px);
+  border-color:var(--border-strong);
   box-shadow:0 12px 30px rgba(0,0,0,0.5);
 }
 
@@ -164,6 +164,7 @@ figure.card.is-extra{display:none}
 .preview.h-show{height:300px}
 .preview iframe{
   width:100%;height:100%;border:0;display:block;background:transparent;
+  pointer-events:auto;
 }
 
 /* پاورقی کارت با فونت فارسی هماهنگ */
@@ -171,8 +172,9 @@ figure.card.is-extra{display:none}
   display:flex;align-items:center;justify-content:space-between;
   padding:10px 14px;background:var(--surface);gap:8px;
 }
-.card-info{display:flex;flex-direction:column;min-width:0;flex:1}
-.card-info .fa{font-family:var(--font-body);font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-info{display:flex;flex-direction:column;min-width:0;flex:1;cursor:pointer}
+.card-info .fa{font-family:var(--font-body);font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color 0.2s}
+.card-info:hover .fa{color:var(--accent)}
 .card-info .slug{
   direction:ltr;text-align:right;font-family:var(--font-mono);font-size:10px;
   color:var(--faint);margin-top:1px;
@@ -186,6 +188,61 @@ figure.card.is-extra{display:none}
   transition:all 0.2s;text-decoration:none;
 }
 .btn-icon:hover{color:#FFF;background:var(--surface-hover);border-color:var(--border-strong)}
+.btn-icon.copy-btn:hover{color:var(--accent);border-color:var(--accent)}
+
+/* مودال نمایش و کپی کد منبع */
+.code-modal-backdrop{
+  position:fixed;inset:0;background:rgba(5,7,10,0.8);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;
+  z-index:1000;padding:20px;
+}
+.code-modal-backdrop.open{display:flex}
+.code-modal{
+  width:100%;max-width:840px;max-height:86vh;background:var(--surface);
+  border:1px solid var(--border-strong);border-radius:18px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.85);display:flex;flex-direction:column;
+  overflow:hidden;animation:modalZoom 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes modalZoom{
+  from{opacity:0;transform:scale(0.96)}
+  to{opacity:1;transform:scale(1)}
+}
+.code-modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  background:var(--surface-2);gap:12px;
+}
+.code-modal-title-group{display:flex;align-items:center;gap:10px;min-width:0}
+.code-modal-badge{
+  background:rgba(56,189,248,0.15);color:var(--accent);border:1px solid rgba(56,189,248,0.3);
+  font-family:var(--font-mono);font-size:11px;padding:3px 8px;border-radius:6px;font-weight:700;
+}
+.code-modal-comp-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.code-modal-slug{font-family:var(--font-mono);font-size:11px;color:var(--faint);direction:ltr}
+.code-modal-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-modal-action{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 12px;
+  border-radius:8px;font-family:var(--font-body);font-size:12px;font-weight:600;
+  cursor:pointer;background:var(--surface);border:1px solid var(--border);
+  color:var(--text);text-decoration:none;transition:all 0.2s;
+}
+.btn-modal-action:hover{border-color:var(--accent);color:#FFF;background:var(--surface-hover)}
+.btn-modal-action.primary{background:var(--accent);color:#090A0D;border-color:var(--accent);font-weight:700}
+.btn-modal-action.primary:hover{filter:brightness(1.1)}
+.code-modal-close{
+  width:30px;height:30px;border-radius:8px;background:none;border:none;
+  color:var(--muted);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.code-modal-close:hover{color:#FFF;background:rgba(255,255,255,0.08)}
+.code-modal-body{
+  flex:1;overflow:auto;padding:16px 20px;background:#090A0D;direction:ltr;text-align:left;
+}
+.code-content{
+  font-family:var(--font-mono);font-size:12px;line-height:1.6;color:#E2E8F0;
+  white-space:pre;tab-size:2;user-select:text;
+}
 
 /* فوتر خلوت */
 footer{
@@ -243,6 +300,33 @@ footer{
 </main>
 
 <div class="copy-toast" id="toast">مسیر فایل کپی شد!</div>
+
+<!-- پنجره مدرن مشاهده و کپی کد منبع -->
+<div class="code-modal-backdrop" id="codeModal">
+  <div class="code-modal">
+    <div class="code-modal-header">
+      <div class="code-modal-title-group">
+        <span class="code-modal-badge">&lt;/&gt; کد منبع</span>
+        <span id="modalCompName" class="code-modal-comp-name"></span>
+        <span id="modalCompSlug" class="code-modal-slug"></span>
+      </div>
+      <div class="code-modal-actions">
+        <button class="btn-modal-action primary" id="modalCopyBtn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>کپی کامل کد</span>
+        </button>
+        <a class="btn-modal-action" id="modalRawLink" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>اجرای تمام‌صفحه</span>
+        </a>
+        <button class="code-modal-close" id="modalCloseBtn" aria-label="بستن">&times;</button>
+      </div>
+    </div>
+    <div class="code-modal-body">
+      <code id="modalCodeBlock" class="code-content"></code>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="foot-inner">
@@ -436,31 +520,57 @@ for (const c of CATALOG) {
 
     const info = document.createElement("div");
     info.className = "card-info";
+    info.title = "برای مشاهده و بررسی کد کلیک کنید";
     const name = document.createElement("span"); name.className = "fa"; name.textContent = it.name;
     const slug = document.createElement("span"); slug.className = "slug"; slug.textContent = it.slug;
     info.append(name, slug);
+    info.addEventListener("click", () => openCodeModal(it.name, it.slug, filePath));
 
     const actions = document.createElement("div");
     actions.className = "card-actions";
 
-    const copyBtn = document.createElement("button");
-    copyBtn.className = "btn-icon";
-    copyBtn.title = "کپی مسیر فایل";
-    copyBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
-    copyBtn.addEventListener("click", (e) => {
+    const copyCodeBtn = document.createElement("button");
+    copyCodeBtn.className = "btn-icon copy-btn";
+    copyCodeBtn.title = "کپی مستقیم کد کامپوننت (HTML/CSS/JS)";
+    copyCodeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`;
+    copyCodeBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      navigator.clipboard.writeText(filePath);
-      showToast("مسیر فایل کپی شد: " + filePath);
+      fetch(filePath)
+        .then(r => {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.text();
+        })
+        .then(code => {
+          navigator.clipboard.writeText(code).then(() => {
+            showToast("کد کامل کامپوننت با موفقیت کپی شد!");
+          }).catch(() => {
+            navigator.clipboard.writeText(filePath);
+            showToast("مسیر فایل کپی شد: " + filePath);
+          });
+        })
+        .catch(() => {
+          navigator.clipboard.writeText(filePath);
+          showToast("مسیر فایل کپی شد: " + filePath);
+        });
+    });
+
+    const viewCodeBtn = document.createElement("button");
+    viewCodeBtn.className = "btn-icon";
+    viewCodeBtn.title = "مشاهده و بازبینی کد";
+    viewCodeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    viewCodeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openCodeModal(it.name, it.slug, filePath);
     });
 
     const openLink = document.createElement("a");
     openLink.className = "btn-icon";
     openLink.href = filePath;
     openLink.target = "_blank";
-    openLink.title = "مشاهده تمام‌صفحه";
+    openLink.title = "مشاهده تمام‌صفحه در تب جدید";
     openLink.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 
-    actions.append(copyBtn, openLink);
+    actions.append(copyCodeBtn, viewCodeBtn, openLink);
     footer.append(info, actions);
     fig.append(pv, footer);
     grid.append(fig);
@@ -543,6 +653,62 @@ window.addEventListener("keydown", (e) => {
     q.focus();
     q.select();
   }
+});
+
+// مدیریت پنجره مودال مشاهده و کپی کد منبع
+const codeModal = document.getElementById("codeModal");
+const modalCompName = document.getElementById("modalCompName");
+const modalCompSlug = document.getElementById("modalCompSlug");
+const modalCodeBlock = document.getElementById("modalCodeBlock");
+const modalCopyBtn = document.getElementById("modalCopyBtn");
+const modalRawLink = document.getElementById("modalRawLink");
+const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+let activeModalCode = "";
+
+function openCodeModal(name, slug, path) {
+  modalCompName.textContent = name;
+  modalCompSlug.textContent = slug;
+  modalRawLink.href = path;
+  modalCodeBlock.textContent = "در حال بارگذاری کد منبع...";
+  activeModalCode = "";
+  codeModal.classList.add("open");
+
+  fetch(path)
+    .then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(code => {
+      activeModalCode = code;
+      modalCodeBlock.textContent = code;
+    })
+    .catch(err => {
+      modalCodeBlock.textContent = "خطا در دریافت کد فایل: " + err.message;
+    });
+}
+
+function closeCodeModal() {
+  codeModal.classList.remove("open");
+}
+
+modalCloseBtn.addEventListener("click", closeCodeModal);
+codeModal.addEventListener("click", (e) => {
+  if (e.target === codeModal) closeCodeModal();
+});
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && codeModal.classList.contains("open")) {
+    closeCodeModal();
+  }
+});
+
+modalCopyBtn.addEventListener("click", () => {
+  if (!activeModalCode) return;
+  navigator.clipboard.writeText(activeModalCode).then(() => {
+    showToast("کد کامل کامپوننت در کلیپ‌بورد کپی شد!");
+  }).catch(() => {
+    showToast("خطا در دسترسی به کلیپ‌بورد");
+  });
 });
 </script>
 </body>

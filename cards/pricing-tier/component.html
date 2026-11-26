@@ -15,37 +15,38 @@ body{
 }
 .pricing-card{
   width:260px;padding:20px 18px;background:#12141A;border-radius:20px;
-  border:1px solid rgba(59,130,246,0.4);position:relative;
+  border:1px solid rgba(56,189,248,0.3);position:relative;
   box-shadow:0 14px 40px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:12px;
 }
 .badge{
-  position:absolute;top:-10px;right:18px;background:linear-gradient(90deg, #3B82F6, #8B5CF6);
+  position:absolute;top:-10px;right:18px;background:linear-gradient(90deg, #38BDF8, #818CF8);
   font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;
-  padding:3px 10px;border-radius:20px;box-shadow:0 4px 12px rgba(59,130,246,0.4);
+  padding:3px 10px;border-radius:20px;box-shadow:0 4px 12px rgba(56,189,248,0.4);color:#090A0D;
 }
 .tier-name{font-size:15px;font-weight:700;color:#F1F5F9}
-.price-row{display:flex;align-items:baseline;gap:4px}
+.price-row{display:flex;align-items:baseline;gap:4px;cursor:pointer}
 .amount{font-size:26px;font-weight:800;color:#FFF}
-.period{font-size:11px;color:#94A3B8}
+.period{font-size:11px;color:#94A3B8;transition:color 0.2s}
+.price-row:hover .period{color:#38BDF8}
 .features{display:flex;flex-direction:column;gap:8px;margin-top:4px}
 .feat{display:flex;align-items:center;gap:8px;font-size:11px;color:#CBD5E1}
 .feat svg{color:#38BDF8;flex-shrink:0}
 .cta-btn{
   width:100%;padding:9px;border-radius:10px;border:none;
-  background:#3B82F6;color:#FFF;font-size:12px;font-weight:600;
-  cursor:pointer;margin-top:4px;box-shadow:0 4px 15px rgba(59,130,246,0.3);
+  background:#38BDF8;color:#090A0D;font-size:12px;font-weight:700;
+  cursor:pointer;margin-top:4px;box-shadow:0 4px 15px rgba(56,189,248,0.25);
   transition:all 0.2s;
 }
-.cta-btn:hover{background:#2563EB;transform:translateY(-1px)}
+.cta-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
 </style>
 </head>
 <body>
 <div class="pricing-card">
   <div class="badge">Most Popular</div>
   <div class="tier-name">Pro Workspace</div>
-  <div class="price-row">
-    <span class="amount">$29</span>
-    <span class="period">/ month &bull; billed annually</span>
+  <div class="price-row" id="priceToggle" title="Click to toggle billing">
+    <span class="amount" id="amountVal">$29</span>
+    <span class="period" id="periodVal">/ month &bull; billed annually</span>
   </div>
   <div class="features">
     <div class="feat">
@@ -61,7 +62,31 @@ body{
       <span>Team cloud synchronization</span>
     </div>
   </div>
-  <button class="cta-btn">Start 14-day Trial</button>
+  <button class="cta-btn" id="trialBtn">Start 14-day Trial</button>
 </div>
+<script>
+let annual = true;
+const priceToggle = document.getElementById('priceToggle');
+const amountVal = document.getElementById('amountVal');
+const periodVal = document.getElementById('periodVal');
+const trialBtn = document.getElementById('trialBtn');
+
+priceToggle.addEventListener('click', () => {
+  annual = !annual;
+  amountVal.textContent = annual ? '$29' : '$39';
+  periodVal.innerHTML = annual ? '/ month &bull; billed annually' : '/ month &bull; billed monthly';
+});
+
+trialBtn.addEventListener('click', () => {
+  trialBtn.textContent = '✓ Plan Selected!';
+  trialBtn.style.background = '#10B981';
+  trialBtn.style.color = '#FFF';
+  setTimeout(() => {
+    trialBtn.textContent = 'Start 14-day Trial';
+    trialBtn.style.background = '#38BDF8';
+    trialBtn.style.color = '#090A0D';
+  }, 1500);
+});
+</script>
 </body>
 </html>

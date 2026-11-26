@@ -65,7 +65,21 @@ body{
   <div class="input-wrap">
     <input type="text" class="input-box" placeholder="name@company.com" value="alex@developer.io">
   </div>
-  <button class="submit-btn">Sign in to Console</button>
+  <button class="submit-btn" id="signinBtn">Sign in to Console</button>
 </div>
+<script>
+const signinBtn = document.getElementById('signinBtn');
+signinBtn.addEventListener('click', () => {
+  signinBtn.textContent = 'Connecting...';
+  setTimeout(() => {
+    signinBtn.textContent = '✓ Authenticated!';
+    signinBtn.style.background = '#10B981';
+    setTimeout(() => {
+      signinBtn.textContent = 'Sign in to Console';
+      signinBtn.style.background = 'linear-gradient(135deg, #2563EB, #38BDF8)';
+    }, 1500);
+  }, 600);
+});
+</script>
 </body>
 </html>
